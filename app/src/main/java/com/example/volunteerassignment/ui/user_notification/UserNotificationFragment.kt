@@ -22,11 +22,23 @@ class UserNotificationFragment : Fragment() {
     ): View? {
         UserNotificationFragment =
             ViewModelProviders.of(this).get(UserNotificationViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+        val root = inflater.inflate(R.layout.fragment_user_notification, container, false)
+        val textView: TextView = root.findViewById(R.id.text_user_notification)
         UserNotificationFragment.text.observe(this, Observer {
             textView.text = it
         })
         return root
+    }
+
+    companion object{
+        private val ARG_PARAM1 = "param1"
+        private val ARG_PARAM2 = "param2"
+
+        fun newInstance(): UserNotificationFragment {
+            val fragment = UserNotificationFragment()
+            val args = Bundle()
+
+            return fragment
+        }
     }
 }

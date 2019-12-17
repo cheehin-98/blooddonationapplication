@@ -21,8 +21,8 @@ class UserPointAndRedeemFragment : Fragment() {
     ): View? {
         UserPointAndRedeemFragment =
             ViewModelProviders.of(this).get(UserPointAndRedeemViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+        val root = inflater.inflate(R.layout.fragment_user_point_and_redeem, container, false)
+        val textView: TextView = root.findViewById(R.id.text_user_point_and_redeem)
         UserPointAndRedeemFragment.text.observe(this, Observer {
             textView.text = it
         })

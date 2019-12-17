@@ -24,8 +24,8 @@ class UserAccountFragment : Fragment() {
     ): View? {
         UserAccountFragment =
             ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+        val root = inflater.inflate(R.layout.fragment_user_my_account, container, false)
+        val textView: TextView = root.findViewById(R.id.text_user_account)
         UserAccountFragment.text.observe(this, Observer {
             textView.text = it
         })

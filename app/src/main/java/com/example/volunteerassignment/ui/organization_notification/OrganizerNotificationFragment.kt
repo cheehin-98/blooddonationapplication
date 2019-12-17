@@ -22,8 +22,8 @@ class OrganizerNotificationFragment : Fragment() {
     ): View? {
         OrganizerNotificationFragment =
             ViewModelProviders.of(this).get(OrganizerNotificationViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+        val root = inflater.inflate(R.layout.fragment_organization_notification, container, false)
+        val textView: TextView = root.findViewById(R.id.text_organization_notification)
         OrganizerNotificationFragment.text.observe(this, Observer {
             textView.text = it
         })

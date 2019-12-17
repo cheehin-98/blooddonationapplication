@@ -13,20 +13,32 @@ import com.example.volunteerassignment.R
 
 class UserActivityFragment : Fragment() {
 
-    private lateinit var UserNotificationFragment: UserActivityViewModel
+    private lateinit var UserActivityFragment: UserActivityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        UserNotificationFragment =
+        UserActivityFragment =
             ViewModelProviders.of(this).get(UserActivityViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
-        UserNotificationFragment.text.observe(this, Observer {
+        val root = inflater.inflate(R.layout.fragment_user_my_activity, container, false)
+        val textView: TextView = root.findViewById(R.id.text_user_activity)
+        UserActivityFragment.text.observe(this, Observer {
             textView.text = it
         })
         return root
+    }
+
+    companion object{
+        private val ARG_PARAM1 = "param1"
+        private val ARG_PARAM2 = "param2"
+
+        fun newInstance(): UserActivityFragment {
+            val fragment = UserActivityFragment()
+            val args = Bundle()
+
+            return fragment
+        }
     }
 }

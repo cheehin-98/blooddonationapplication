@@ -23,8 +23,8 @@ class OrganizerAccountFragment : Fragment() {
     ): View? {
         OrganizerAccountFragment =
             ViewModelProviders.of(this).get(OrganizerAccountViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+        val root = inflater.inflate(R.layout.fragment_organization_my_account, container, false)
+        val textView: TextView = root.findViewById(R.id.text_organization_my_account)
         OrganizerAccountFragment.text.observe(this, Observer {
             textView.text = it
         })

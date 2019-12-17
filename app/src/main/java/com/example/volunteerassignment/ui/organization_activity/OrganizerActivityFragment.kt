@@ -24,8 +24,8 @@ class OrganizerActivityFragment : Fragment() {
     ): View? {
         OrganizerActivityFragment =
             ViewModelProviders.of(this).get(OrganizerActivityViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+        val root = inflater.inflate(R.layout.fragment_organization_my_activity, container, false)
+        val textView: TextView = root.findViewById(R.id.text_organization_my_activity)
         OrganizerActivityFragment.text.observe(this, Observer {
             textView.text = it
         })

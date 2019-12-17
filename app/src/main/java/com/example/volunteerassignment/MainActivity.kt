@@ -1,5 +1,6 @@
 package com.example.volunteerassignment
 
+import android.app.TaskStackBuilder
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -14,8 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.example.volunteerassignment.ui.user_activity.UserActivityFragment
+import com.example.volunteerassignment.ui.user_notification.UserNotificationFragment
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -32,8 +40,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }*/
-
-
+        
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -47,20 +54,23 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        nav_view.setNavigationItemSelectedListener(this)
     }
 
-    /*implement this 2 row code*/
-
     override fun onBackPressed() {
-        super.onBackPressed()
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+        when (item.itemId){
+            R.id.action_settings -> return true
+            else ->  return super.onOptionsItemSelected(item)
+        }
     }
-
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -71,5 +81,34 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.user_notification -> {
+                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserNotificationFragment.newInstance())
+                    .addToBackStack(UserNotificationFragment.toString())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+
+               if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                }
+            }
+           R.id.user_myActivity -> {
+                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserActivityFragment.newInstance())
+                    .addToBackStack(UserActivityFragment.toString())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+
+                if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                }
+            }
+        }
+
+
+        /*drawer_layout.closeDrawer(GravityCompat.START)*/
+        return true
     }
 }
