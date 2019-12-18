@@ -4,35 +4,40 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single" android:id="@+id/user_navigate" android:visible="true">
+
         <item
-            android:id="@+id/user_notification"
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_user_notification"
             android:icon="@drawable/ic_menu_notifications"
             android:title="@string/user_menu_Notification" /> <!--Home, ic_menu_camera-->
         <item
-            android:id="@+id/user_myActivity"
+            android:id="@+id/nav_user_activity"
             android:icon="@drawable/ic_menu_activity"
             android:title="@string/user_menu_myActivity" /> <!--Gallery, ic_menu_gallery-->
         <item
-            android:id="@+id/user_PointAndRedeem"
+            android:id="@+id/nav_user_point_and_redeem"
             android:icon="@drawable/ic_menu_redeem"
             android:title="@string/user_menu_PointAndRedeem" /><!--slideshow, ic_menu_slideshow, menu_slideshow-->
         <item
-            android:id="@+id/user_myAccount"
+            android:id="@+id/nav_user_account"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/user_menu_myAccount" /><!--slideshow, ic_menu_manage, menu_tools-->
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/organization_navigate" android:visible="true">
         <item
-            android:id="@+id/organization_notification"
+            android:id="@+id/nav_organizer_notification"
             android:icon="@drawable/ic_menu_notifications"
             android:title="@string/user_menu_Notification" />
         <item
-            android:id="@+id/organization_myActivity"
+            android:id="@+id/nav_organizer_activity"
             android:icon="@drawable/ic_menu_activity"
             android:title="@string/user_menu_myActivity" />
         <item
-            android:id="@+id/organization_myAccount"
+            android:id="@+id/nav_organizer_account"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/user_menu_myAccount" />
 

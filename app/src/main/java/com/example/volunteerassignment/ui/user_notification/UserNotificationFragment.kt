@@ -30,15 +30,15 @@ class UserNotificationFragment : Fragment() {
         return root
     }
 
-    companion object{
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
-
-        fun newInstance(): UserNotificationFragment {
-            val fragment = UserNotificationFragment()
-            val args = Bundle()
-
-            return fragment
-        }
-    }
+//    companion object{
+//        private val ARG_PARAM1 = "param1"
+//        private val ARG_PARAM2 = "param2"
+//
+//        fun newInstance(): UserNotificationFragment {
+//            val fragment = UserNotificationFragment()
+//            val args = Bundle()
+//
+//            return fragment
+//        }
+//    }
 }

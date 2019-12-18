@@ -23,7 +23,7 @@ import com.example.volunteerassignment.ui.user_notification.UserNotificationFrag
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -33,13 +33,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        /*fab ====  don't implement the fab function */
-
-        /*val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
         
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -54,23 +47,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        nav_view.setNavigationItemSelectedListener(this)
+        /*nav_view.setNavigationItemSelectedListener(this)*/
     }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.action_settings -> return true
-            else ->  return super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onBackPressed() {
+//        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+//            drawer_layout.closeDrawer(GravityCompat.START)
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId){
+//            R.id.action_settings -> return true
+//            else ->  return super.onOptionsItemSelected(item)
+//        }
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -83,32 +76,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.user_notification -> {
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserNotificationFragment.newInstance())
-                    .addToBackStack(UserNotificationFragment.toString())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-
-               if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-                    drawer_layout.closeDrawer(GravityCompat.START)
-                }
-            }
-           R.id.user_myActivity -> {
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserActivityFragment.newInstance())
-                    .addToBackStack(UserActivityFragment.toString())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-
-                if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-                    drawer_layout.closeDrawer(GravityCompat.START)
-                }
-            }
-        }
-
-
-        /*drawer_layout.closeDrawer(GravityCompat.START)*/
-        return true
-    }
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId){
+//            R.id.user_notification -> {
+//                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserNotificationFragment.newInstance())
+//                    .addToBackStack(UserNotificationFragment.toString())
+//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                    .commit()
+//
+//               if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+//                    drawer_layout.closeDrawer(GravityCompat.START)
+//                }
+//            }
+//           R.id.user_myActivity -> {
+//                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserActivityFragment.newInstance())
+//                    .addToBackStack(UserActivityFragment.toString())
+//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                    .commit()
+//
+//                if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+//                    drawer_layout.closeDrawer(GravityCompat.START)
+//                }
+//            }
+//        }
+//
+//
+//        /*drawer_layout.closeDrawer(GravityCompat.START)*/
+//        return true
+//    }
 }
