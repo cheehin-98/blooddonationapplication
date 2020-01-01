@@ -14,6 +14,7 @@ android {
         applicationId "com.example.volunteerassignment"
         minSdkVersion 16
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -46,9 +47,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     //kapt 'androidx.databinding:databinding-compiler-common:3.4.0'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0-beta04'
-    implementation 'androidx.fragment:fragment-ktx:1.2.0-alpha04'
+    implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
-    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-firestore:21.3.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

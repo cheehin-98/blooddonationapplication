@@ -1,4 +1,4 @@
-package com.example.volunteerassignment.ui.user_point_and_redeem
+package com.example.volunteerassignment.ui.user_account
 
 
 import android.os.Bundle
@@ -6,22 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import com.example.volunteerassignment.R
-import com.google.firebase.firestore.FirebaseFirestore
 
 /**
  * A simple [Fragment] subclass.
  */
-class UserPointAndRedeem_Reward : Fragment() {
+class UserAccountFollow : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val db = FirebaseFirestore.getInstance()
-
-        return inflater.inflate(R.layout.fragment_user_point_and_redeem__reward, container, false)
+        return inflater.inflate(R.layout.fragment_user_account_follow, container, false)
     }
 
 

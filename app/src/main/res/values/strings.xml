@@ -30,16 +30,8 @@
     <string name="history">Reward History</string>
     <string name="cat">Category</string>
     <string name="currPoint">Your Current Point: </string>
-    <!--extra-->
-    <!--  <string name="user_menu_myActivity">Share</string>
-  <string name="user_menu_myActivity">Send</string>-->
 
-
-    <!--ori defined-->
-    <!--<string name="menu_home">Home</string>
-   <string name="menu_gallery">Gallery</string>
-   <string name="menu_slideshow">Slideshow</string>
-   <string name="menu_tools">Tools</string>
-   <string name="menu_share">Share</string>
-   <string name="menu_send">Send</string>-->
+    <string name="attend">Attendance</string>
+    <string name="follow">Follow</string>
+    <string name="achieve">Achievement</string>
 </resources>

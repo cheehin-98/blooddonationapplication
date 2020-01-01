@@ -1,9 +1,7 @@
 package com.example.volunteerassignment
 
-import android.app.TaskStackBuilder
+import android.content.Context
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -14,14 +12,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.view.MenuItem
-import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.example.volunteerassignment.ui.user_activity.UserActivityFragment
-import com.example.volunteerassignment.ui.user_notification.UserNotificationFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import androidx.multidex.MultiDex
 
 class MainActivity : AppCompatActivity(){
 
@@ -33,7 +24,6 @@ class MainActivity : AppCompatActivity(){
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -50,21 +40,6 @@ class MainActivity : AppCompatActivity(){
         /*nav_view.setNavigationItemSelectedListener(this)*/
     }
 
-//    override fun onBackPressed() {
-//        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-//            drawer_layout.closeDrawer(GravityCompat.START)
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId){
-//            R.id.action_settings -> return true
-//            else ->  return super.onOptionsItemSelected(item)
-//        }
-//    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -76,32 +51,8 @@ class MainActivity : AppCompatActivity(){
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId){
-//            R.id.user_notification -> {
-//                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserNotificationFragment.newInstance())
-//                    .addToBackStack(UserNotificationFragment.toString())
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                    .commit()
-//
-//               if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-//                    drawer_layout.closeDrawer(GravityCompat.START)
-//                }
-//            }
-//           R.id.user_myActivity -> {
-//                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserActivityFragment.newInstance())
-//                    .addToBackStack(UserActivityFragment.toString())
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                    .commit()
-//
-//                if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-//                    drawer_layout.closeDrawer(GravityCompat.START)
-//                }
-//            }
-//        }
-//
-//
-//        /*drawer_layout.closeDrawer(GravityCompat.START)*/
-//        return true
-//    }
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 }

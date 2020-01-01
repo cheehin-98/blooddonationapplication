@@ -33,9 +33,8 @@ class UserPointAndRedeemFragment : Fragment() {
 
         tabLayout = root.findViewById(R.id.tabLayout)
         viewpager = root.findViewById(R.id.viewPager)
-//        UserPointAndRedeemFragment.text.observe(this, Observer {
-//            textView.text = it
-//        })
+
+
         setupPager()
         integrateTabWithPager()
         return root
@@ -61,10 +60,8 @@ class UserPointAndRedeemFragment : Fragment() {
                     UserPointAndRedeem_Reward()
                 }
             }
-            //return SubNewsFragment.newInstance(subTabNameCollection[position])
         }
 
-        // Return the total number of fragment.
         override fun getCount(): Int { // number of views
             return 2
         }
