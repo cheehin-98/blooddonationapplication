@@ -9,4 +9,6 @@ class UserPointAndRedeemViewModel: ViewModel() {
         value = "This is user point and redeem Fragment"
     }
     val text: LiveData<String> = _text
+
+
 }
