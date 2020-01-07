@@ -29,6 +29,7 @@
     <string name="reward">Point &amp; Reward</string>
     <string name="history">Reward History</string>
     <string name="cat">Category</string>
+    <string name="name">Name: </string>
     <string name="currPoint">Your Current Point: </string>
 
     <string name="attend">Attendance</string>
@@ -36,11 +37,11 @@
     <string name="achieve">Achievement</string>
 
 
-
     <string name="user_type"></string>
     <string-array name="user_account">
         <item>Volunteer</item>
         <item>Organizer</item>
     </string-array>
+    <string name="title_activity_prize_detail">PrizeDetailActivity</string>
 
 </resources>
