@@ -16,14 +16,12 @@ import com.google.android.material.tabs.TabLayout
 import android.content.Intent
 import com.google.firebase.storage.FirebaseStorage
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import java.io.ByteArrayOutputStream
 import android.net.Uri
 import android.widget.Toast
-import java.io.File
 
 class UserAccountFragment : Fragment() {
 
@@ -78,6 +76,7 @@ class UserAccountFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
 
         val profileStorageRef = storage.reference.child("User/sample1/profile.jpg")
+        val backStorageRef= storage.reference.child("User/sample1/background.jpg")
 
         val ONE_MEGABYTE = (1024 * 1024).toLong()
 
@@ -124,9 +123,9 @@ class UserAccountFragment : Fragment() {
                 var uploadTask = profileRef.putBytes(data)
 
                 uploadTask.addOnFailureListener {
-                    // Handle unsuccessful uploads give tost respond
+                    Toast.makeText(context, "Image Not Saved!", Toast.LENGTH_SHORT).show()
                 }.addOnSuccessListener {
-                    //toast reponse for succed upload to cload storage
+                    Toast.makeText(context, "Image Saved!", Toast.LENGTH_SHORT).show()
                 }
 
             }else if(requestCode==2){
@@ -142,7 +141,7 @@ class UserAccountFragment : Fragment() {
                 var uploadTask = backRef.putBytes(data)
 
                 uploadTask.addOnFailureListener {
-                    // Handle unsuccessful uploads give tost respond
+                    Toast.makeText(context, "Image Not Saved!", Toast.LENGTH_SHORT).show()
                 }.addOnSuccessListener {
                     Toast.makeText(context, "Image Saved!", Toast.LENGTH_SHORT).show()
                 }

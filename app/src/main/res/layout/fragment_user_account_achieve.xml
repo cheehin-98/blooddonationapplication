@@ -8,13 +8,22 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/achieve" />
+
+            <ImageView
+                android:id="@+id/trophiesImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
 
         </LinearLayout>
     </ScrollView>
