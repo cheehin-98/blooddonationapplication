@@ -34,4 +34,13 @@
     <string name="attend">Attendance</string>
     <string name="follow">Follow</string>
     <string name="achieve">Achievement</string>
+
+
+
+    <string name="user_type"></string>
+    <string-array name="user_account">
+        <item>Volunteer</item>
+        <item>Organizer</item>
+    </string-array>
+
 </resources>
