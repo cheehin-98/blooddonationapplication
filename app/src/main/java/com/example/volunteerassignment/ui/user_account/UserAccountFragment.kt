@@ -16,14 +16,15 @@ import com.google.android.material.tabs.TabLayout
 import android.content.Intent
 import com.google.firebase.storage.FirebaseStorage
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import java.io.ByteArrayOutputStream
 import android.net.Uri
+import android.widget.Toast
+import java.io.File
 
-/**
- * A simple [Fragment] subclass.
- */
 class UserAccountFragment : Fragment() {
 
     private lateinit var UserAccountFragment: UserAccountViewModel
@@ -32,10 +33,11 @@ class UserAccountFragment : Fragment() {
     private lateinit var viewpager: ViewPager
     private lateinit var tabLayout: TabLayout
 
-
+    private lateinit var BackImg:ImageView
     private lateinit var ProfileImg: ImageView
 
-    private val GALLERY_REQUEST_CODE = 1
+    private lateinit var name:TextView
+    private lateinit var currPoint:TextView
 
     private lateinit var storage: FirebaseStorage
 
@@ -55,60 +57,96 @@ class UserAccountFragment : Fragment() {
 
         ProfileImg = root.findViewById(R.id.profileImg)
         ProfileImg.setOnClickListener{
-            pickFromGallery()
+            pickFromGallery(1)
         }
+
+        BackImg = root.findViewById(R.id.backImg)
+        BackImg.setOnClickListener{
+            pickFromGallery(2)
+        }
+
+        name= root.findViewById(R.id.txtName)
+        currPoint=root.findViewById(R.id.txtPoint)
+
+
+        loadContent()
 
         return root
     }
 
-    private fun pickFromGallery() {
+    private fun loadContent(){
+        storage = FirebaseStorage.getInstance()
+
+        val profileStorageRef = storage.reference.child("User/sample1/profile.jpg")
+
+        val ONE_MEGABYTE = (1024 * 1024).toLong()
+
+        profileStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
+                val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                ProfileImg.setImageBitmap(bmp)
+            }
+            .addOnFailureListener {
+
+            }
+    }
+
+    private fun pickFromGallery(int: Int) {
 
         val intent = Intent(Intent.ACTION_PICK)
-
         intent.type = "image/*"
-
         val mimeTypes = arrayOf("image/jpeg", "image/png")
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+        startActivityForResult(intent, int)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == GALLERY_REQUEST_CODE &&  data != null && data.getData() != null && resultCode == RESULT_OK){
+        if(data != null && data.getData() != null && resultCode == RESULT_OK){
+
             val dataUri = data.data as Uri
-            //val bitmapImag = data.extras as Bitmap
-            ProfileImg.setImageURI(dataUri)
+            storage = FirebaseStorage.getInstance()//like establish connection
 
-            storage = FirebaseStorage.getInstance()
+            val storageRef = storage.reference.child("User/sample1")//sample1 should be replace with user login UID
 
-            val storageRef = storage.reference
+            if(requestCode == 1){
+                ProfileImg.setImageURI(dataUri)
 
-            // Create a reference to "mountains.jpg"
-            val mountainsRef = storageRef.child("profile.jpg")
+                val profileRef = storageRef.child("profile.jpg")
+//            val mountainImagesRef = storageRef.child("User/profile.jpg")
+//            mountainsRef.name == mountainImagesRef.name
+//            mountainsRef.path == mountainImagesRef.path
+                val bitmap = (ProfileImg.drawable as BitmapDrawable).bitmap
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
 
-            // Create a reference to 'images/mountains.jpg'
-            val mountainImagesRef = storageRef.child("images/profile.jpg")
+                var uploadTask = profileRef.putBytes(data)
 
-            // While the file names are the same, the references point to different files
-            mountainsRef.name == mountainImagesRef.name // true
-            mountainsRef.path == mountainImagesRef.path // false
+                uploadTask.addOnFailureListener {
+                    // Handle unsuccessful uploads give tost respond
+                }.addOnSuccessListener {
+                    //toast reponse for succed upload to cload storage
+                }
 
-            val bitmap = (ProfileImg.drawable as BitmapDrawable).bitmap
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val data = baos.toByteArray()
+            }else if(requestCode==2){
+                BackImg.setImageURI(dataUri)
 
-            var uploadTask = mountainsRef.putBytes(data)
+                val backRef = storageRef.child("background.jpg")
 
-            uploadTask.addOnFailureListener {
-                // Handle unsuccessful uploads
-            }.addOnSuccessListener {
-                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-                // ...
+                val bitmap = (BackImg.drawable as BitmapDrawable).bitmap
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+
+                var uploadTask = backRef.putBytes(data)
+
+                uploadTask.addOnFailureListener {
+                    // Handle unsuccessful uploads give tost respond
+                }.addOnSuccessListener {
+                    Toast.makeText(context, "Image Saved!", Toast.LENGTH_SHORT).show()
+                }
             }
-
         }
     }
 
