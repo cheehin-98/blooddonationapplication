@@ -28,7 +28,7 @@ class UserPointAndRedeem_History : Fragment() {
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
 
-        val historyRef = ref.document("Users/sample1/History")
+        //val historyRef = ref.document("Users/sample1/History")
         return root
     }
 

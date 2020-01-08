@@ -2,6 +2,7 @@ package com.example.volunteerassignment.ui.user_point_and_redeem
 
 import android.content.ContentValues.TAG
 import android.graphics.BitmapFactory
+import android.net.sip.SipSession
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,8 +16,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.volunteerassignment.R
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.okhttp.internal.DiskLruCache
 
 
 class UserPointAndRedeem_Reward : Fragment() {
@@ -30,6 +34,8 @@ class UserPointAndRedeem_Reward : Fragment() {
     private lateinit var name: TextView
     private lateinit var currPoint: TextView
     private lateinit var  search:EditText
+
+    private lateinit var UserRef:DocumentReference
 
     private lateinit var recyclerView: RecyclerView
 
@@ -49,23 +55,23 @@ class UserPointAndRedeem_Reward : Fragment() {
         currPoint=root.findViewById(R.id.txtPoint)
         search=root.findViewById(R.id.editTextSrch)
 
-
-
         loadContent1()
         return root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         ref = FirebaseFirestore.getInstance()
-        val UserRef = ref.document("Users/sample1/Point")
+        UserRef = ref.document("Users/sample1")
 
         UserRef.addSnapshotListener{ snapshot, e ->
             if(snapshot!!.exists()){
+                name.setText(getString(R.string.name))
+                name.append(snapshot.get("Name").toString())
                 currPoint.setText(getText(R.string.currPoint))
-                currPoint.append(snapshot.data.toString())
+                currPoint.append(snapshot.get("Point").toString())
             }else{
-                Log.w(TAG, "Listen failed.", e)
+                Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -84,22 +90,22 @@ class UserPointAndRedeem_Reward : Fragment() {
                 ProfileImg.setImageResource(R.drawable.ic_menu_camera)
             }
 
-        ref.document("Users/sample1")
-            .get()
-            .addOnSuccessListener { documentSnapshot ->
-                if(documentSnapshot.exists()){
-                    name.setText(getString(R.string.name))
-                    name.append(documentSnapshot.get("Name").toString())
-                    currPoint.setText(getText(R.string.currPoint))
-                    currPoint.append(documentSnapshot.get("Point").toString())
-                }
-                else{
-                    Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
-            }
+//        ref.document("Users/sample1")
+//            .get()
+//            .addOnSuccessListener { documentSnapshot ->
+//                if(documentSnapshot.exists()){
+//                    name.setText(getString(R.string.name))
+//                    name.append(documentSnapshot.get("Name").toString())
+//                    currPoint.setText(getText(R.string.currPoint))
+//                    currPoint.append(documentSnapshot.get("Point").toString())
+//                }
+//                else{
+//                    Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            .addOnFailureListener { exception ->
+//                Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
+//            }
     }
 
 
