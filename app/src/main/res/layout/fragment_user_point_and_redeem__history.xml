@@ -6,11 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.user_point_and_redeem.UserPointAndRedeem_History"
     android:orientation="vertical">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.1">
     <TextView
+        android:id="@+id/txtHis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:textSize="18sp" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/prizeRecycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="History" />
+        android:orientation="vertical">
 
+    </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
