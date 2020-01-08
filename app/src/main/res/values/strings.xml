@@ -43,4 +43,19 @@
         <item>Organizer</item>
     </string-array>
 
+
+
+    <!-- Organizer create event string name-->
+    <string name="eventTitle">Event Title</string>
+    <string name="eventNumOfParticipate">Number of Participate</string>
+    <string name="eventFromDate">From Date</string>
+    <string name="eventToDate">To Date</string>
+    <string name="eventFromTime">From Time</string>
+    <string name="eventToTime">To Time</string>
+    <string name="eventAddress">Address</string>
+    <string name="eventVenue">Venue</string>
+    <string name="eventPoint">Point</string>
+    <string name="eventDescription">Description</string>
+    <string name="termAndCondition">Check here to indicate that you have read and agree to the terms of the Registration of Volunteer Event </string>
+    <string name="btnCreateEvent">Create Event</string>
 </resources>

@@ -12,7 +12,7 @@ android {
     }
     defaultConfig {
         applicationId "com.example.volunteerassignment"
-        minSdkVersion 16
+        minSdkVersion 26
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 1
@@ -33,6 +33,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //TextView floating style
+    implementation 'com.android.support:appcompat-v7:29.0.0'
+    implementation 'com.android.support:design:29.0.0'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
@@ -53,5 +57,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.3.1'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
+
 }
 apply plugin: 'com.google.gms.google-services'
