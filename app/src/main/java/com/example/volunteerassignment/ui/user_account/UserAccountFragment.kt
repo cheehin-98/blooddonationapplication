@@ -24,6 +24,7 @@ import android.graphics.drawable.BitmapDrawable
 import java.io.ByteArrayOutputStream
 import android.net.Uri
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -42,6 +43,7 @@ class UserAccountFragment : Fragment() {
 
     private lateinit var name:TextView
     private lateinit var currPoint:TextView
+    private lateinit var btnEdit:Button
 
     private lateinit var storage: FirebaseStorage
     private lateinit var ref:FirebaseFirestore
@@ -73,11 +75,15 @@ class UserAccountFragment : Fragment() {
             pickFromGallery(2)
         }
 
+
         name= root.findViewById(R.id.txtName)
         currPoint=root.findViewById(R.id.txtPoint)
-
         loadContent()
-
+        btnEdit = root.findViewById(R.id.btnEdit)
+        btnEdit.setOnClickListener {
+            val intent = Intent(context,editProfile()::class.java)
+            startActivity(intent)
+        }
         return root
     }
 
@@ -122,6 +128,7 @@ class UserAccountFragment : Fragment() {
         //ref.collection("Users").whereEqualTo("Type","Admin")
 
     }
+
 
     private fun pickFromGallery(int: Int) {
 

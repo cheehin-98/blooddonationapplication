@@ -2,6 +2,7 @@ package com.example.volunteerassignment.ui.user_point_and_redeem
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.volunteerassignment.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.reward_history_single.*
 import java.util.*
 
 
@@ -35,6 +37,8 @@ class PrizeDetailActivity : AppCompatActivity() {
         requiredPoint = findViewById(R.id.txtPoint)
         val extras = this.intent.extras
         val prizeID = extras!!.getString("prizeID")
+        val call = extras.getString("Call")
+
 
 
         val rewardStorageRef = storage.reference.child("Prize/" + prizeID.toString() + ".jpg")
@@ -82,37 +86,36 @@ class PrizeDetailActivity : AppCompatActivity() {
 
         redeemBtn = findViewById(R.id.btnRedeem)
 
+        if(call=="History"){
+            redeemBtn.visibility = View.GONE
+        }else if(call=="Reward"){
+            redeemBtn.setOnClickListener {
 
+            if (currPoint <= requiredPoint.text.toString().toInt()) {
+                redeemBtn.isEnabled = false
+                redeemBtn.isClickable = false
+                Toast.makeText(this, "You Don't have enough Point!", Toast.LENGTH_SHORT).show()
+            } else {
+                val newPoint = (currPoint - requiredPoint.text.toString().toInt())
 
-                redeemBtn.setOnClickListener {
+                val currentTime = Calendar.getInstance().time
+                ref.collection("Users").document("sample1").update("Point", newPoint)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Successful Update Point!", Toast.LENGTH_SHORT).show()
+                        val history = hashMapOf(
+                            "Reward_ID" to prizeID,
+                            "Name" to name.text.toString(),
+                            "Point_Used" to requiredPoint.text.toString().toInt(),
+                            "Redeem_Date" to currentTime.toString(),
+                            "UID" to "sample1"
 
-                    if (currPoint <= requiredPoint.text.toString().toInt()) {
-                        redeemBtn.isEnabled = false
-                        redeemBtn.isClickable = false
-                        Toast.makeText(this, "You Don't have enough Point!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        val newPoint = (currPoint - requiredPoint.text.toString().toInt())
-
-                        val currentTime = Calendar.getInstance().time
-                        ref.collection("Users").document("sample1").update("Point", newPoint)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Successful Update Point!", Toast.LENGTH_SHORT).show()
-                            val history = hashMapOf(
-                                "Name" to name.text.toString(),
-                                "Point_Used" to requiredPoint.text.toString().toInt(),
-                                "Redeem_Date" to currentTime.toString(),
-                                "UID" to "sample1"
-
-                                )
-                                ref.collection("History_Reward")
-                                    .add(history)
-                             this.finish()
-                        }
-                        }
+                        )
+                        ref.collection("History_Reward")
+                            .add(history)
+                        this.finish()
                     }
-
-
-
-
+            }
+            }
+        }
     }
 }

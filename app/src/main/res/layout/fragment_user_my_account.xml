@@ -60,6 +60,18 @@
                 android:text="@string/currPoint"
                 app:layout_constraintStart_toStartOf="@+id/txtName"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="72dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Edit"
+                android:textSize="8sp"
+                app:layout_constraintStart_toEndOf="@+id/profileImg"
+                app:layout_constraintTop_toBottomOf="@+id/txtPoint" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

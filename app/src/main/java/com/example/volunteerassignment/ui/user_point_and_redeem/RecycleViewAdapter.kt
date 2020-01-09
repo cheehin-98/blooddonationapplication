@@ -19,20 +19,20 @@ class RecycleViewAdapter(val context: Context, val imageName: ArrayList<String>,
     val storage = FirebaseStorage.getInstance()
     val ONE_MEGABYTE = (1024 * 1024).toLong()
 
-    override fun getItemCount(): Int {
-        return images.size
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImgViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater
             .inflate(R.layout.prize_single_view, parent, false)
         return ImgViewHolder(view)
+    }
 
+    override fun getItemCount(): Int {
+        return images.size
     }
 
     override fun onBindViewHolder(holder: ImgViewHolder, position: Int) {
         holder.txtPrize.text = imageName[position]
+
 
         val rewardRef= storage.reference.child("Prize/"+images[position]+".jpg")
 
@@ -48,10 +48,10 @@ class RecycleViewAdapter(val context: Context, val imageName: ArrayList<String>,
         holder.prizeImg.setOnClickListener {
             val intent =Intent(context,PrizeDetailActivity::class.java)
             intent.putExtra("prizeID",images[position])
+            intent.putExtra("Call", "Reward")
             context.startActivity(intent)
         }
     }
-
 
     class ImgViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val prizeImg = view.findViewById<ImageButton>(R.id.prizeImg)

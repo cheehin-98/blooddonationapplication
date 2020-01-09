@@ -45,7 +45,6 @@
     <string name="title_activity_prize_detail">PrizeDetailActivity</string>
 
 
-
     <!-- Organizer create event string name-->
     <string name="eventTitle">Event Title</string>
     <string name="eventNumOfParticipate">Number of Participate</string>
