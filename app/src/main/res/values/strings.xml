@@ -36,8 +36,15 @@
     <string name="achieve">Achievement</string>
 
 
-
     <string name="user_type"></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="keyinUsername">Username/Email</string>
+    <string name="keyinPassword">Password</string>
+    <string name="linktoSigup">Don\'t have an account? Please Sigup Now.</string>
+    <string name="keyinSignupUsername">Username</string>
+    <string name="keyinSignupPassword">Password</string>
+    <string name="keyinSignupEmail">Email</string>
     <string-array name="user_account">
         <item>Volunteer</item>
         <item>Organizer</item>

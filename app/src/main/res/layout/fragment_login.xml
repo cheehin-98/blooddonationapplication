@@ -4,7 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:background="@color/toolbar_color_header">
 
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/login"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/text_Login"
@@ -20,6 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageButton
         android:id="@+id/img_btn_clear"
         android:layout_width="80dp"
@@ -27,125 +45,101 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
         android:background="@android:color/transparent"
         android:visibility="visible"
-        app:srcCompat="@drawable/ic_cancel_black_60dp" />
+        app:srcCompat="@drawable/ic_cancel_black_60dp"
+        android:onClick="GoBack"/>
 
     <ImageView
         android:id="@+id/image_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="104dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="171dp"
-        android:layout_marginLeft="171dp"
-        android:layout_marginTop="91dp"
-        android:layout_marginEnd="179dp"
-        android:layout_marginRight="179dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginLeft="156dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginRight="155dp"
         app:srcCompat="@drawable/ic_account_circle_black_60dp" />
 
-    <TextView
-        android:id="@+id/lblusernameoremail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/image_account"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="121dp"
-        android:layout_marginLeft="121dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
-        android:fontFamily="@font/roboto"
-        android:text="Username or Email"
-        android:textColor="#000000"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/editUserName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lblusernameoremail"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="98dp"
-        android:layout_marginLeft="98dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:hint="Username/Email"
-        android:inputType="textPersonName" />
+        android:layout_below="@+id/image_account"
+        android:layout_marginTop="59dp"
+        app:errorEnabled="true">
 
-    <TextView
-        android:id="@+id/textPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editUserName"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="198dp"
-        android:layout_marginRight="198dp"
-        android:fontFamily="@font/roboto"
-        android:text="Password"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/keyinUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/keyinUsername" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editpassword"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputEventTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="96dp"
-        android:layout_marginLeft="96dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginRight="102dp"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:hint="******"
-        android:inputType="textPassword" />
+        android:layout_below="@+id/inputUsername"
+        android:layout_marginTop="57dp"
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/keyinPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/keyinPassword"
+            android:inputType="textPassword"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editpassword"
+        android:layout_below="@+id/inputEventTitle"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginRight="163dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginLeft="161dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginRight="162dp"
         android:background="@color/colorAccent"
+        android:fontFamily="@font/roboto"
         android:text="Login"
         android:textAllCaps="false"
-        android:textColor="#fff"
-        android:fontFamily="@font/roboto"/>
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/linktoSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginLeft="73dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/linktoSigup"
+        android:textColor="#44a6c6"
+        android:onClick="LinktoSignup"/>
 
 
 </RelativeLayout>
