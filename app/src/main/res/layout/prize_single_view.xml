@@ -10,8 +10,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/prizeImg"
-        android:src="@drawable/gold_trophy"/>
+        android:id="@+id/prizeImg"/>
 
     <TextView
         android:layout_width="150dp"

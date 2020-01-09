@@ -15,8 +15,6 @@ import com.google.android.material.tabs.TabLayout
 
 class UserPointAndRedeemFragment : Fragment() {
 
-    private lateinit var UserPointAndRedeemFragment: UserPointAndRedeemViewModel
-
     private lateinit var viewpager:ViewPager
     private lateinit var tabLayout:TabLayout
 
@@ -25,8 +23,6 @@ class UserPointAndRedeemFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        UserPointAndRedeemFragment =
-            ViewModelProviders.of(this).get(UserPointAndRedeemViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_user_point_and_redeem, container, false)
 
