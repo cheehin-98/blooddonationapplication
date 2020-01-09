@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.example.volunteerassignment.R
@@ -54,10 +53,10 @@ class UserPointAndRedeemFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 1 -> {
-                    UserPointAndRedeem_History()
+                    UserPointAndRedeemHistory()
                 }
                 else -> {
-                    UserPointAndRedeem_Reward()
+                    UserPointAndRedeemReward()
                 }
             }
         }
