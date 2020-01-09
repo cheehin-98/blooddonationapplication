@@ -59,4 +59,5 @@
     <string name="eventDescription">Description</string>
     <string name="termAndCondition">Check here to indicate that you have read and agree to the terms of the Registration of Volunteer Event </string>
     <string name="btnCreateEvent">Create Event</string>
+    <string name="redeem">Redeem</string>
 </resources>
