@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.volunteerassignment.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ActivityToday : Fragment() {
@@ -40,11 +44,31 @@ class ActivityToday : Fragment() {
         val c = activity as Context
         eventID = arrayListOf()
 
+        val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
+        val today = LocalDate.parse(LocalDate.now().toString(), formatter)
 
-//        layoutMgr = LinearLayoutManager(c)
-//        activityList.layoutManager = layoutMgr
-//        actViewAdapter = ActViewAdapter(c,eventID)
-//        activityList.adapter = actViewAdapter
+
+        ref.collection("Event_Go").whereEqualTo("UID", "sample1").whereEqualTo("Sign_In", "No")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (doc in documents) {
+
+                    ref.collection("Event").document(doc.get("Event_ID").toString())
+                        .get()
+                        .addOnSuccessListener { document ->
+                            val eventDate = LocalDate.parse(document.get("From Date").toString(), formatter)
+
+                            if(today == eventDate){
+                                eventID.add(doc.get("Event ID").toString())
+                            }
+                        }
+                }
+                layoutMgr = LinearLayoutManager(c)
+                activityList.layoutManager = layoutMgr
+                actViewAdapter = ActViewAdapter(c, eventID)
+                activityList.adapter = actViewAdapter
+
+            }
 
         return root
     }

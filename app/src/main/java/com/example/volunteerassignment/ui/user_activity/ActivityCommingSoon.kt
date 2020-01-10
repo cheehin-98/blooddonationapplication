@@ -15,6 +15,8 @@ import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 import kotlin.collections.ArrayList
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class ActivityCommingSoon : Fragment() {
@@ -41,34 +43,30 @@ class ActivityCommingSoon : Fragment() {
 
         eventID = arrayListOf()
 
+        val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
+        val today = LocalDate.parse(LocalDate.now().toString(), formatter)
+
+
         ref.collection("Event_Go").whereEqualTo("UID", "sample1").whereEqualTo("Sign_In", "No")
             .get()
             .addOnSuccessListener { documents ->
-                for (document in documents) {
+                for (doc in documents) {
 
-                    ref.collection("Event").document(document.get("Event_ID").toString())
+                    ref.collection("Event").document(doc.get("Event_ID").toString())
                         .get()
                         .addOnSuccessListener { document ->
+                            val eventDate = LocalDate.parse(document.get("From Date").toString(), formatter)
 
-                            val sdf = SimpleDateFormat("dd-MM-yyyy")
-                            val date = sdf.parse(document.get("From Date").toString())
-                            val cal = Calendar.getInstance()
-                            cal.time = date
-                             val c = Calendar.getInstance()
-                             val year = c.get(Calendar.YEAR)
-                             val month = c.get(Calendar.MONTH)
-                             val day = c.get(Calendar.DAY_OF_MONTH)
-                                println(day.toString())
-                            println(cal.time.toString())
-                            //
+                            if(today>eventDate){
+                                eventID.add(doc.get("Event ID").toString())
+                            }
                         }
 
                 }
-
-//                layoutMgr = LinearLayoutManager(c)
-//                activityList.layoutManager = layoutMgr
-//                actViewAdapter = ActViewAdapter(c, eventID)
-//                activityList.adapter = actViewAdapter
+                layoutMgr = LinearLayoutManager(c)
+                activityList.layoutManager = layoutMgr
+                actViewAdapter = ActViewAdapter(c, eventID)
+                activityList.adapter = actViewAdapter
 
             }
 
