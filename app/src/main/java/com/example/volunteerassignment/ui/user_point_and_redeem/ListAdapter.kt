@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.volunteerassignment.R
@@ -57,7 +56,7 @@ class ListAdapter (val context: Context, val rewardName: ArrayList<String>, priv
     class TxtViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtName = view.findViewById<TextView>(R.id.txtName)
         val txtPoint = view.findViewById<TextView>(R.id.txtPoint)
-        val txtDate = view.findViewById<TextView>(R.id.txtDate)
+        val txtDate = view.findViewById<TextView>(R.id.txtAddr)
         val btnDetail = view.findViewById<Button>(R.id.btnDetails)
         val rewardImage = view.findViewById<ImageView>(R.id.rewardImg)
 
