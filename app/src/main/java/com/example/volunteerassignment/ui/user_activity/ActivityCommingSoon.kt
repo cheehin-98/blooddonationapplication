@@ -58,24 +58,21 @@ class ActivityCommingSoon : Fragment() {
                              val year = c.get(Calendar.YEAR)
                              val month = c.get(Calendar.MONTH)
                              val day = c.get(Calendar.DAY_OF_MONTH)
-
+                                println(day.toString())
+                            println(cal.time.toString())
                             //
                         }
 
                 }
 
-                layoutMgr = LinearLayoutManager(c)
-                activityList.layoutManager = layoutMgr
-                actViewAdapter = ActViewAdapter(c, eventID)
-                activityList.adapter = actViewAdapter
+//                layoutMgr = LinearLayoutManager(c)
+//                activityList.layoutManager = layoutMgr
+//                actViewAdapter = ActViewAdapter(c, eventID)
+//                activityList.adapter = actViewAdapter
 
             }
 
 
-        layoutMgr = LinearLayoutManager(c)
-        activityList.layoutManager = layoutMgr
-        actViewAdapter = ActViewAdapter(c,eventID)
-        activityList.adapter = actViewAdapter
         return root
     }
 

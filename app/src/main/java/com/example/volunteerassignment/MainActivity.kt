@@ -119,13 +119,10 @@ fun LinktoSignup(view: View){
         super.attachBaseContext(base)
         MultiDex.install(this)
     }
-
-}
-
-    private fun updateNavHeader(){
+    private fun updateNavHeader() {
         val navView: NavigationView = findViewById(R.id.nav_view)
 
-       val headerView:View  = navView.getHeaderView(0)
+        val headerView: View = navView.getHeaderView(0)
 
         val navEmail: TextView = headerView.findViewById(R.id.nav_email)
 
@@ -134,6 +131,9 @@ fun LinktoSignup(view: View){
         val btnLogin: Button = headerView.findViewById(R.id.btnLogin)
 
         val picture: ImageView = headerView.findViewById(R.id.imageView)
+
+    }
+}
 
 
 
@@ -153,9 +153,6 @@ fun LinktoSignup(view: View){
               //  val name = profile.displayName
               //  val email = profile.email
                // val photoUrl = profile.photoUrl
-            }
-        }
-
 
         // val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
 

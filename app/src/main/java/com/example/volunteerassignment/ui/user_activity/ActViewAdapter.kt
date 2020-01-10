@@ -9,9 +9,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.volunteerassignment.R
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
     RecyclerView.Adapter<ActViewAdapter.TxtViewHolder>() {
+
+
+    private lateinit var storage: FirebaseStorage
+    private lateinit var ref: FirebaseFirestore
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActViewAdapter.TxtViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -26,7 +35,15 @@ class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
 
     override fun onBindViewHolder(holder: ActViewAdapter.TxtViewHolder, position: Int) {
 
+        ref = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
 
+        ref.collection("Event").document(eventID[position])
+            .get()
+            .addOnSuccessListener { document ->
+                //holder.txtName.text = document.get("")
+                //
+            }
 //        holder.btnDetail.text = point[position]
 //        holder.eventImage = rewardName[position]
 

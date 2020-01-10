@@ -41,10 +41,10 @@ class ActivityToday : Fragment() {
         eventID = arrayListOf()
 
 
-        layoutMgr = LinearLayoutManager(c)
-        activityList.layoutManager = layoutMgr
-        actViewAdapter = ActViewAdapter(c,eventID)
-        activityList.adapter = actViewAdapter
+//        layoutMgr = LinearLayoutManager(c)
+//        activityList.layoutManager = layoutMgr
+//        actViewAdapter = ActViewAdapter(c,eventID)
+//        activityList.adapter = actViewAdapter
 
         return root
     }
