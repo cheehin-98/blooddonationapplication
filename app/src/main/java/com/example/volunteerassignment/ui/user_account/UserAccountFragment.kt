@@ -16,64 +16,78 @@ import com.google.android.material.tabs.TabLayout
 import android.content.Intent
 import com.google.firebase.storage.FirebaseStorage
 import android.app.Activity.RESULT_OK
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import java.io.ByteArrayOutputStream
 import android.net.Uri
+import android.util.Log
+import android.widget.Button
 import android.widget.Toast
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 
 class UserAccountFragment : Fragment() {
 
-    private lateinit var UserAccountFragment: UserAccountViewModel
+    private lateinit var userAccountFragment: UserAccountViewModel
 
 
     private lateinit var viewpager: ViewPager
     private lateinit var tabLayout: TabLayout
 
-    private lateinit var BackImg:ImageView
-    private lateinit var ProfileImg: ImageView
+    private lateinit var backImg:ImageView
+    private lateinit var profileImg: ImageView
 
     private lateinit var name:TextView
     private lateinit var currPoint:TextView
+    private lateinit var btnEdit:Button
 
     private lateinit var storage: FirebaseStorage
+    private lateinit var ref:FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        UserAccountFragment =
+        userAccountFragment =
             ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_user_my_account, container, false)
+
+        ref = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
 
         tabLayout = root.findViewById(R.id.tabLayout)
         viewpager = root.findViewById(R.id.viewPager)
         setupPager()
         integrateTabWithPager()
 
-        ProfileImg = root.findViewById(R.id.profileImg)
-        ProfileImg.setOnClickListener{
+        profileImg = root.findViewById(R.id.profileImg)
+        profileImg.setOnClickListener{
             pickFromGallery(1)
         }
 
-        BackImg = root.findViewById(R.id.backImg)
-        BackImg.setOnClickListener{
+        backImg = root.findViewById(R.id.backImg)
+        backImg.setOnClickListener{
             pickFromGallery(2)
         }
 
+
         name= root.findViewById(R.id.txtName)
         currPoint=root.findViewById(R.id.txtPoint)
-
-
         loadContent()
-
+        btnEdit = root.findViewById(R.id.btnEdit)
+        btnEdit.setOnClickListener {
+            val intent = Intent(context,editProfile()::class.java)
+            startActivity(intent)
+        }
         return root
     }
 
     private fun loadContent(){
-        storage = FirebaseStorage.getInstance()
 
         val profileStorageRef = storage.reference.child("User/sample1/profile.jpg")
         val backStorageRef= storage.reference.child("User/sample1/background.jpg")
@@ -82,12 +96,39 @@ class UserAccountFragment : Fragment() {
 
         profileStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
                 val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                ProfileImg.setImageBitmap(bmp)
+                profileImg.setImageBitmap(bmp)
             }
             .addOnFailureListener {
-
+                profileImg.setImageResource(R.drawable.ic_menu_camera)
             }
+
+        backStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
+            val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                backImg.setImageBitmap(bmp)
+            }
+            .addOnFailureListener {
+                backImg.setImageResource(R.drawable.ic_menu_camera)
+            }
+
+
+        ref.collection("Users").document("sample1")//UID
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                if(documentSnapshot.exists()){
+                    name.append(documentSnapshot.get("Name").toString())
+                    currPoint.append(documentSnapshot.get("Point").toString())
+                }
+                else{
+                    Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
+            }
+        //ref.collection("Users").whereEqualTo("Type","Admin")
+
     }
+
 
     private fun pickFromGallery(int: Int) {
 
@@ -104,43 +145,25 @@ class UserAccountFragment : Fragment() {
         if(data != null && data.getData() != null && resultCode == RESULT_OK){
 
             val dataUri = data.data as Uri
-            storage = FirebaseStorage.getInstance()//like establish connection
 
             val storageRef = storage.reference.child("User/sample1")//sample1 should be replace with user login UID
 
             if(requestCode == 1){
-                ProfileImg.setImageURI(dataUri)
+                profileImg.setImageURI(dataUri)
 
                 val profileRef = storageRef.child("profile.jpg")
-//            val mountainImagesRef = storageRef.child("User/profile.jpg")
-//            mountainsRef.name == mountainImagesRef.name
-//            mountainsRef.path == mountainImagesRef.path
-                val bitmap = (ProfileImg.drawable as BitmapDrawable).bitmap
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val data = baos.toByteArray()
 
-                var uploadTask = profileRef.putBytes(data)
-
-                uploadTask.addOnFailureListener {
-                    Toast.makeText(context, "Image Not Saved!", Toast.LENGTH_SHORT).show()
-                }.addOnSuccessListener {
+                profileRef.putFile(dataUri).addOnSuccessListener {
                     Toast.makeText(context, "Image Saved!", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener{
+                    Toast.makeText(context, "Image Not Saved!", Toast.LENGTH_SHORT).show()
                 }
 
             }else if(requestCode==2){
-                BackImg.setImageURI(dataUri)
+                backImg.setImageURI(dataUri)
 
                 val backRef = storageRef.child("background.jpg")
-
-                val bitmap = (BackImg.drawable as BitmapDrawable).bitmap
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val data = baos.toByteArray()
-
-                var uploadTask = backRef.putBytes(data)
-
-                uploadTask.addOnFailureListener {
+                backRef.putFile(dataUri).addOnFailureListener {
                     Toast.makeText(context, "Image Not Saved!", Toast.LENGTH_SHORT).show()
                 }.addOnSuccessListener {
                     Toast.makeText(context, "Image Saved!", Toast.LENGTH_SHORT).show()

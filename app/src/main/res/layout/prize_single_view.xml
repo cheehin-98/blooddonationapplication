@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/prizeImg"
+        android:src="@drawable/gold_trophy"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Prize Name"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:id="@+id/prizetxt"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+
+
+</LinearLayout>
