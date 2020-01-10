@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "421216314312-1gb80npq7ad718i1l4qsagbu6tmq2k9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.volunteerassignment",
+            "certificate_hash": "ba535e1919f9b2443f73f5c1b927aacbf8e13fb5"
+          }
+        },
+        {
           "client_id": "421216314312-4ijij0315mgmv4mscq0at9m6qhco3h0c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

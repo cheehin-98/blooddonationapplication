@@ -45,7 +45,6 @@
     <string name="title_activity_prize_detail">PrizeDetailActivity</string>
 
 
-
     <!-- Organizer create event string name-->
     <string name="eventTitle">Event Title</string>
     <string name="eventNumOfParticipate">Number of Participate</string>
@@ -59,4 +58,14 @@
     <string name="eventDescription">Description</string>
     <string name="termAndCondition">Check here to indicate that you have read and agree to the terms of the Registration of Volunteer Event </string>
     <string name="btnCreateEvent">Create Event</string>
+    <string name="organizerCreateEvent">Create Event</string>
+    <string name="btnUpdateEvent">Update Event</string>
+    <string name="Upload">Upload</string>
+    <string name="Title">Title</string>
+    <string name="eventRegisterDateTime">Event Register Date Time</string>
+    <string name="eventRegisterDateTimes">Register Date Time:</string>
+    <string name="Today">Event on Today</string>
+    <string name="organizerUpdateEvent">Update Event</string>
+    <string name="btnDeleteEvent">Delete Event</string>
+    <string name="btnGenerateAttendance">Generate Attendance</string>
 </resources>

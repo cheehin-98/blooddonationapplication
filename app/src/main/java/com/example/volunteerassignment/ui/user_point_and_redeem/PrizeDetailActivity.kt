@@ -1,6 +1,7 @@
 package com.example.volunteerassignment.ui.user_point_and_redeem
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.volunteerassignment.R

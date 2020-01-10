@@ -13,10 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.organization_activity.OrganizerGenerateAttedance"></activity>
+        <activity android:name=".ui.organization_activity.OrganizerTodayEventActivity" />
+        <activity android:name=".ui.organization_activity.OrganizerUpdateEventActivity" />
+        <activity android:name=".ui.organization_activity.OrganizerCreateEventActivity" />
         <activity
             android:name=".ui.user_point_and_redeem.PrizeDetailActivity"
             android:label="@string/title_activity_prize_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

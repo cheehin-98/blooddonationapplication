@@ -12,7 +12,7 @@ android {
     }
     defaultConfig {
         applicationId "com.example.volunteerassignment"
-        minSdkVersion 16
+        minSdkVersion 26
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 1
@@ -33,6 +33,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //textView Floating
+    implementation 'com.android.support:appcompat-v7:29.0.0'
+    implementation 'com.android.support:design:29.0.0'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
@@ -44,6 +48,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-database:16.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -53,5 +58,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.3.1'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
+
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    // For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-beta01"
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+    implementation 'com.android.support:cardview-v7:29.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

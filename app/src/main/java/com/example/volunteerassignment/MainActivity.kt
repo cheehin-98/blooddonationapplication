@@ -12,6 +12,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.View
 import androidx.multidex.MultiDex
 
 class MainActivity : AppCompatActivity(){
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity(){
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         /*nav_view.setNavigationItemSelectedListener(this)*/
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -55,4 +57,6 @@ class MainActivity : AppCompatActivity(){
         super.attachBaseContext(base)
         MultiDex.install(this)
     }
+
+
 }

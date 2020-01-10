@@ -5,8 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="toolbar_color_header">#ff0066</color>
-
-
+    <color name="btnColorLightRed">#ffb3b3</color>
     <color name="btnColorRed">#ff0066</color>
     <color name="textColor">#ffffff</color>
 </resources>
