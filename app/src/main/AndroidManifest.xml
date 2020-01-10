@@ -17,6 +17,9 @@
         <activity android:name=".ui.organization_activity.OrganizerTodayEventActivity" />
         <activity android:name=".ui.organization_activity.OrganizerUpdateEventActivity" />
         <activity android:name=".ui.organization_activity.OrganizerCreateEventActivity" />
+        <activity android:name=".ui.login.LoginActivity"></activity>
+        <activity android:name=".ui.signup.SignUpActivity"></activity>
+        <activity android:name=".ui.user_account.editProfile"></activity>
         <activity
             android:name=".ui.user_point_and_redeem.PrizeDetailActivity"
             android:label="@string/title_activity_prize_detail"
@@ -29,7 +32,6 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
