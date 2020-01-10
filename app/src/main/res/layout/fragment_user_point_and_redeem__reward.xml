@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user_point_and_redeem.UserPointAndRedeem_Reward"
+    tools:context=".ui.user_point_and_redeem.UserPointAndRedeemReward"
     android:orientation="vertical">
 
     <LinearLayout
@@ -35,6 +35,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:text="@string/name"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/profileImg"
                     app:layout_constraintTop_toTopOf="@+id/profileImg" />
 
@@ -44,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/currPoint"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/txtName"
                     app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
@@ -99,29 +101,30 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/catCoupon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sample1"/>
+                        android:text="Coupon/Voucher" />
                     <Button
+                        android:id="@+id/catFood"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sample2"/>
+                        android:text="Food"/>
                     <Button
+                        android:id="@+id/catDrink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sample1"/>
+                        android:text="Drink"/>
                     <Button
+                        android:id="@+id/catElec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sample2"/>
+                        android:text="Electronic"/>
                     <Button
+                        android:id="@+id/catOther"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sample1"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sample2"/>
+                        android:text="Others"/>
                 </LinearLayout>
             </HorizontalScrollView>
     </LinearLayout>
@@ -131,23 +134,10 @@
         android:layout_height="0dp"
         android:layout_weight="0.65"
         android:orientation="vertical">
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/prizeRecycle"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="vertical">-->
-
-<!--                <GridView-->
-<!--                    android:id="@+id/prizeGrid"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:numColumns="2"-->
-<!--                    android:gravity="center"-->
-<!--                    android:stretchMode="columnWidth">-->
-
-<!--                </GridView>-->
-
-<!--            </androidx.recyclerview.widget.RecyclerView>-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/prizeRecycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
