@@ -50,17 +50,14 @@ class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
                 holder.txtDuration.text = document.get("From Date").toString() + document.get("To Date").toString()
             }
 
-        val eventImgRef = storage.reference.child("Event/Organizer_UID/" + prizeID.toString() + ".jpg")
+        val eventImgRef = storage.reference.child("Event/Organizer_UID/GiagDmqIQJZZOOHPHqhnbAedGLh1/" + eventID.toString() + ".jpg")
 
 
 
         eventImgRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
             val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            imgPrize.setImageBitmap(bmp)
+            holder.eventImage.setImageBitmap(bmp)
         }
-            .addOnFailureListener {
-                imgPrize.setImageResource(R.drawable.ic_menu_camera)
-            }
 //        holder.btnDetail.text = point[position]
 //        holder.eventImage = rewardName[position]
 

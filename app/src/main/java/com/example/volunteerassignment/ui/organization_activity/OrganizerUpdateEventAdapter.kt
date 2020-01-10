@@ -47,25 +47,20 @@ class RecycleViewAdapter(val context: Context, val EventTitle: ArrayList<String>
             }
 
 
-      holder.cardHistoryListView.setOnClickListener {
+      holder.cardUpdateListView.setOnClickListener {
             val intent = Intent(context, OrganizerUpdateEventActivity::class.java)
             intent.putExtra("imgID",eventImages[position])
             context.startActivity(intent)
         }
 
-      holder.cardTodayListView.setOnClickListener {
-            val intent = Intent(context, OrganizerTodayEventActivity::class.java)
-            intent.putExtra("imgID",eventImages[position])
-            context.startActivity(intent)
-        }
 
     }
 
     class ImgViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val eventImg = view.findViewById<ImageButton>(R.id.event_image)
         val txtEventTitle = view.findViewById<TextView>(R.id.eventTitle)
-        val cardHistoryListView = view.findViewById<CardView>(R.id.cardHistoryListView)
-        val cardTodayListView = view.findViewById<CardView>(R.id.cardTodayListView)
+        val cardUpdateListView = view.findViewById<CardView>(R.id.cardUpdateListView)
+
 
     }
 }

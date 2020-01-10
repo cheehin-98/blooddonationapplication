@@ -304,10 +304,6 @@ class OrganizerCreateEventFragment : Fragment() {
 
                              val events = HashMap<String, Any>()
 
-                             val progressDialog = ProgressDialog(getContext())
-                             progressDialog.setTitle("Uploading")
-                             progressDialog.show()
-
                              events.put("Event Title", setEventTitle)
                              events.put("From Date", setEventFromDate)
                              events.put("To Date", setEventToDate)
@@ -322,29 +318,34 @@ class OrganizerCreateEventFragment : Fragment() {
                              events.put("Event Create ", LocalDate.now())
                              events.put("Event Last Update ", LocalDate.now())
                              events.put("Admit Rule & Term", 1)
+
+                             val progressDialog = ProgressDialog(getContext())
+                             progressDialog.setTitle("Inserting")
+                             progressDialog.show()
+
                              //Insert
                              database.collection("Event").document()
                                  .set(events).addOnSuccessListener {
 
-                                     database.collection("Event").get()
+                                  database.collection("Event").get()
                                          .addOnSuccessListener { document ->
 
                                              for (document in document){
                                                  imgID = document.id
 
 
-                                                 val storageRef =
-                                                     storage.reference.child("Event/Organizer_UID/" + organizerUID +"/")//sample1 should be replace with user login UID
+                                                 /*  val storageRef =
+                                                    storage.reference.child("Event/Organizer_UID/" + organizerUID +"/")//sample1 should be replace with user login UID
 
-                                                 val profileRef = storageRef.child(imgID+".jpg")
+                                                val profileRef = storageRef.child(imgID+".jpg")
 
-                                                 profileRef.putFile(mImageUri)
+                                                profileRef.putFile(mImageUri)*/
 
                                                  Toast.makeText(context, " Added!", Toast.LENGTH_SHORT).show()
-                                                 progressDialog.hide()
+
                                              }
                                      }
-
+                                     progressDialog.hide()
 
                                  }.addOnFailureListener {
                                      Toast.makeText(context, "No Add!", Toast.LENGTH_SHORT).show()
@@ -352,7 +353,7 @@ class OrganizerCreateEventFragment : Fragment() {
                                  }
                          }
                      }
-                     createAll()
+                     //createAll()
                  }catch (e: Exception)
                  {
                      Toast.makeText(context, "Please Select Event Image", Toast.LENGTH_SHORT).show()

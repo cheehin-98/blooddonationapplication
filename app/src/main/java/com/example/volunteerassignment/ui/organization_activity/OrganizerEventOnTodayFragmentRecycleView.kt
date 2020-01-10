@@ -24,11 +24,11 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
     private lateinit var OrganizerUpdateEventFragmentRecycleView: OrganizerActivityViewModel
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var layoutMgr : RecyclerView.LayoutManager
-    private lateinit var recyclerViewAdapter : RecycleViewAdapter
+    private lateinit var recyclerViewAdapter : RecycleViewAdapters
 
     private lateinit var eventImage: ArrayList<String>
     private lateinit var EventTitle: ArrayList<String>
-    private lateinit var eventRegisterDate: ArrayList<String>
+    private lateinit var eventDate: ArrayList<String>
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
@@ -49,8 +49,8 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
         database = FirebaseFirestore.getInstance()//.document("Event/" + organizerUID)
         mRecyclerView = root.findViewById(R.id.organization_Today_event_recycle_view)
 
-       eventImage = arrayListOf()
-        eventRegisterDate = arrayListOf()
+        eventImage = arrayListOf()
+        eventDate = arrayListOf()
         EventTitle = arrayListOf()
 
         database.collection("Event").get()
@@ -64,7 +64,7 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
                     if(toEventDate < LocalDate.now())
                     {
                         EventTitle.add(document.get("Event Title").toString())
-                        eventRegisterDate.add(document.get("Event Title").toString())
+                        eventDate.add(document.get("From Date").toString())
                         eventImage.add(document.id)
                     }
                 }
@@ -76,7 +76,7 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
         mRecyclerView = root.findViewById(R.id.organization_Today_event_recycle_view)
         layoutMgr = LinearLayoutManager(context)
         mRecyclerView.layoutManager = layoutMgr
-        recyclerViewAdapter = RecycleViewAdapter(activity,EventTitle,eventImage)
+        recyclerViewAdapter = RecycleViewAdapters(activity,EventTitle,eventImage, eventDate)
         recyclerViewAdapter.notifyDataSetChanged()
         mRecyclerView.adapter = recyclerViewAdapter
 
