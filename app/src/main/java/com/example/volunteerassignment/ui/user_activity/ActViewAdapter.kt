@@ -1,6 +1,7 @@
 package com.example.volunteerassignment.ui.user_activity
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.volunteerassignment.R
+import com.example.volunteerassignment.ui.home.eventActivityDetails
+import com.example.volunteerassignment.ui.user_point_and_redeem.PrizeDetailActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
@@ -39,12 +42,13 @@ class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
 
+        val sdf = SimpleDateFormat("EEEE")
         ref.collection("Event").document(eventID[position])
             .get()
             .addOnSuccessListener { document ->
                 holder.txtName.text = document.get("Event Title").toString()
                 holder.txtAddr.text = document.get("Address").toString()
-                val sdf = SimpleDateFormat("EEEE")
+
                 val date = sdf.parse(document.get("Drom Date").toString())
                 holder.txtDay.text = date.time.toString()
                 holder.txtDuration.text = document.get("From Date").toString() + document.get("To Date").toString()
@@ -57,6 +61,13 @@ class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
         eventImgRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
             val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
             holder.eventImage.setImageBitmap(bmp)
+        }
+
+        holder.btnDetail.setOnClickListener{
+            val intent = Intent(context, eventActivityDetails::class.java)
+            intent.putExtra("eventID",eventID[position])
+
+            context.startActivity(intent)
         }
 //        holder.btnDetail.text = point[position]
 //        holder.eventImage = rewardName[position]
