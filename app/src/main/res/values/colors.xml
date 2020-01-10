@@ -3,11 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-
     <color name="toolbar_color_header">#ff0066</color>
-
-<color name="my_grey">#D0D0D0</color>
-
+    <color name="btnColorLightRed">#ffb3b3</color>
+    <color name="my_grey">#D0D0D0</color>
     <color name="btnColorRed">#ff0066</color>
     <color name="textColor">#ffffff</color>
 </resources>

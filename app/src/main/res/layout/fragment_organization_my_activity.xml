@@ -1,188 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="25dp">
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEventTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editEventTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/eventTitle"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEventNumOfParticipate"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editEventNumOfParticipate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/eventNumOfParticipate"/>
-        </com.google.android.material.textfield.TextInputLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEventPoint"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editEventPoint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/eventPoint"/>
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventFromDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventFromDate"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:hint="@string/eventFromDate"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventToDate"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventToDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:hint="@string/eventToDate"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventFromTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventFromTime"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:hint="@string/eventFromTime"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventToTime"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventToTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:hint="@string/eventToTime"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEventAddress"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editEventAddress"
-                android:layout_width="match_parent"
+            android:background="?attr/colorPrimary">
+
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/organizerCreateEvent"
                 android:layout_height="wrap_content"
-                android:hint="@string/eventAddress"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_width="match_parent"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEventVenue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editEventVenue"
-                android:layout_width="match_parent"
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/organizerUpdateEvent"
                 android:layout_height="wrap_content"
-                android:hint="@string/eventVenue"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_width="match_parent"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEventDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editEventDescription"
-                android:layout_width="match_parent"
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/Today"
                 android:layout_height="wrap_content"
-                android:hint="@string/eventDescription"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_width="match_parent"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+    </androidx.viewpager.widget.ViewPager>
 
 
-        <CheckBox
-            android:id="@+id/ckhTermAndCondition"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/termAndCondition" />
-
-        <Button
-            android:id="@+id/btnCreateEvent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:padding="20dp"
-            android:layout_gravity="center"
-            android:text="@string/btnCreateEvent"
-            android:background="@color/btnColorRed"
-            android:textColor="@color/textColor">
-        </Button>
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

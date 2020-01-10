@@ -120,9 +120,7 @@ fun LinktoSignup(view: View){
         MultiDex.install(this)
     }
 
-
-
-
+}
 
     private fun updateNavHeader(){
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -166,8 +164,3 @@ fun LinktoSignup(view: View){
        // val buttonSignUp: Button = findViewById(R.id.btnSignUp)
 
         //buttonLogin.setOnClickListener()
-
-
-
-
-
