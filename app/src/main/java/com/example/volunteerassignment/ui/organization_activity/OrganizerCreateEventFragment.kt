@@ -31,9 +31,6 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlinx.android.synthetic.main.fragment_organization_create_event.*
-import java.time.LocalDateTime
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
@@ -315,9 +312,7 @@ class OrganizerCreateEventFragment : Fragment() {
                              events.put("Venue", setEventVenue)
                              events.put("Description", setEventDescription)
                              events.put("Orgernizer_UID", organizerUID)
-                             events.put("Event Create ", LocalDate.now())
-                             events.put("Event Last Update ", LocalDate.now())
-                             events.put("Admit Rule & Term", 1)
+
 
                              val progressDialog = ProgressDialog(getContext())
                              progressDialog.setTitle("Inserting")
@@ -334,26 +329,24 @@ class OrganizerCreateEventFragment : Fragment() {
                                                  imgID = document.id
 
 
-                                                 /*  val storageRef =
+                                                 val storageRef =
                                                     storage.reference.child("Event/Organizer_UID/" + organizerUID +"/")//sample1 should be replace with user login UID
 
                                                 val profileRef = storageRef.child(imgID+".jpg")
 
-                                                profileRef.putFile(mImageUri)*/
+                                                profileRef.putFile(mImageUri)
 
                                                  Toast.makeText(context, " Added!", Toast.LENGTH_SHORT).show()
-
+                                                 createAll()
+                                                 progressDialog.hide()
                                              }
                                      }
-                                     progressDialog.hide()
-
                                  }.addOnFailureListener {
                                      Toast.makeText(context, "No Add!", Toast.LENGTH_SHORT).show()
-
                                  }
                          }
                      }
-                     //createAll()
+
                  }catch (e: Exception)
                  {
                      Toast.makeText(context, "Please Select Event Image", Toast.LENGTH_SHORT).show()
@@ -366,6 +359,7 @@ class OrganizerCreateEventFragment : Fragment() {
             Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
         }
         return
+
     }
 
     private fun createAll()

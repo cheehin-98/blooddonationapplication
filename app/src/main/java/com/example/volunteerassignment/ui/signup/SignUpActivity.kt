@@ -8,12 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.volunteerassignment.R
 import com.example.volunteerassignment.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_signup.*
@@ -22,10 +21,17 @@ import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
 
+    private lateinit var userSpinner: Spinner
+    private lateinit var btnRegister: Button
+   // private lateinit var storage: FirebaseStorage
+    private lateinit var database: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_signup)
         val Goback: ImageButton = findViewById(R.id.img_btn_back)
+        userSpinner = findViewById(R.id.spinnerUser)
+        btnRegister = findViewById(R.id.btnRegister)
         Goback.setOnClickListener {
             onBackPressed()
         }
@@ -60,6 +66,10 @@ class SignUpActivity : AppCompatActivity() {
     fun createEmailId() {
         val email = keyinSignupEmail.text.toString()
         val password = editSignupPassword.text.toString()
+        var userType = 0
+        userType = userSpinner.selectedItemPosition
+
+
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please enter text in email/pw", Toast.LENGTH_SHORT).show()
             return
@@ -70,6 +80,19 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Register Successfully", Toast.LENGTH_SHORT).show()
 
                 uploadImagetoFirebaseStorage()
+              var UID =  FirebaseAuth.getInstance().uid
+
+                val events = HashMap<String, Any>()
+                events.put("User Type", userType)
+                events.put("UID", UID.toString())
+                events.put("Email", email)
+
+                database.collection("Users").document()
+                    .set(events).addOnSuccessListener {
+                        Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show()
+                    }  .addOnFailureListener {
+                        Toast.makeText(this, "Failed to register", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Failed to register", Toast.LENGTH_SHORT).show()

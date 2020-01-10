@@ -51,7 +51,7 @@ class OrganizerTodayEventActivity : AppCompatActivity() {
         btnGenAttendance.findViewById<View>(R.id.btnGenerateAttendance)
 
         btnGenAttendance.setOnClickListener {
-            val intent = Intent(this, OrganizerUpdateEventActivity::class.java)
+            val intent = Intent(this, OrganizerGenerateAttedance::class.java)
             intent.putExtra("imgID", imgID)
             this.startActivity(intent)
         }

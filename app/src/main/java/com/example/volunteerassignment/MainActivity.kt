@@ -29,8 +29,6 @@ import com.example.volunteerassignment.ui.home.HomeFragment
 import com.example.volunteerassignment.ui.login.LoginActivity
 import com.example.volunteerassignment.ui.login.LoginFragment
 import com.example.volunteerassignment.ui.signup.SignUpActivity
-import com.example.volunteerassignment.ui.signup.SignUpFragment
-import com.example.volunteerassignment.ui.signup.SignUpViewModel
 import com.example.volunteerassignment.ui.user_account.UserAccountFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
