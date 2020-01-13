@@ -12,7 +12,6 @@ import com.example.volunteerassignment.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.reward_history_single.*
 import java.util.*
 
 
