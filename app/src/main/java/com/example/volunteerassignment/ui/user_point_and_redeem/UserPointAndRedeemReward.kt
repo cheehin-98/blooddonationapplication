@@ -50,6 +50,7 @@ class UserPointAndRedeemReward : Fragment() {
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
+        mAuth = FirebaseAuth.getInstance()
 
         profileImg = root.findViewById(R.id.profileImg)
         name=root.findViewById(R.id.txtName)

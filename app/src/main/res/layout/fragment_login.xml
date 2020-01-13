@@ -50,8 +50,7 @@
         android:layout_marginRight="13dp"
         android:background="@android:color/transparent"
         android:visibility="visible"
-        app:srcCompat="@drawable/ic_cancel_black_60dp"
-        android:onClick="GoBack"/>
+        app:srcCompat="@drawable/ic_cancel_black_60dp"/>
 
     <ImageView
         android:id="@+id/image_account"
