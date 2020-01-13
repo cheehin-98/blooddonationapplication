@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.volunteerassignment.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.reward_history_single.*
@@ -19,6 +20,7 @@ class PrizeDetailActivity : AppCompatActivity() {
 
     private lateinit var storage: FirebaseStorage
     private lateinit var ref: FirebaseFirestore
+    private lateinit var mAuth: FirebaseAuth
 
     private lateinit var imgPrize : ImageView
     private lateinit var name : TextView
@@ -32,6 +34,8 @@ class PrizeDetailActivity : AppCompatActivity() {
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
+        mAuth =  FirebaseAuth.getInstance()
+
         imgPrize = findViewById(R.id.prizeImage)
         name = findViewById(R.id.txtName)
         requiredPoint = findViewById(R.id.txtPoint)
@@ -69,9 +73,9 @@ class PrizeDetailActivity : AppCompatActivity() {
                 Toast.makeText(this, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
             }
 
+        val UID = mAuth.currentUser!!.uid
 
-
-        ref.collection("Users").document("sample1")
+        ref.collection("Users").document(UID)
             .get()
             .addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
@@ -99,7 +103,7 @@ class PrizeDetailActivity : AppCompatActivity() {
                 val newPoint = (currPoint - requiredPoint.text.toString().toInt())
 
                 val currentTime = Calendar.getInstance().time
-                ref.collection("Users").document("sample1").update("Point", newPoint)
+                ref.collection("Users").document(UID).update("Point", newPoint)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Successful Update Point!", Toast.LENGTH_SHORT).show()
                         val history = hashMapOf(

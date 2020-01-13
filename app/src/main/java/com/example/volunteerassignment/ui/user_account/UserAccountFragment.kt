@@ -9,30 +9,21 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.example.volunteerassignment.R
 import com.google.android.material.tabs.TabLayout
 import android.content.Intent
 import com.google.firebase.storage.FirebaseStorage
 import android.app.Activity.RESULT_OK
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import java.io.ByteArrayOutputStream
 import android.net.Uri
-import android.util.Log
+import android.provider.Contacts
 import android.widget.Button
 import android.widget.Toast
-import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
 
 class UserAccountFragment : Fragment() {
-
-    private lateinit var userAccountFragment: UserAccountViewModel
 
 
     private lateinit var viewpager: ViewPager
@@ -47,18 +38,19 @@ class UserAccountFragment : Fragment() {
 
     private lateinit var storage: FirebaseStorage
     private lateinit var ref:FirebaseFirestore
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userAccountFragment =
-            ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_user_my_account, container, false)
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
+        mAuth =  FirebaseAuth.getInstance()
 
         tabLayout = root.findViewById(R.id.tabLayout)
         viewpager = root.findViewById(R.id.viewPager)
@@ -89,8 +81,9 @@ class UserAccountFragment : Fragment() {
 
     private fun loadContent(){
 
-        val profileStorageRef = storage.reference.child("User/sample1/profile.jpg")
-        val backStorageRef= storage.reference.child("User/sample1/background.jpg")
+        val UID = mAuth.currentUser!!.uid
+        val profileStorageRef = storage.reference.child("User/"+UID+"/profile.jpg")
+        val backStorageRef= storage.reference.child("User/"+UID+"/background.jpg")
 
         val ONE_MEGABYTE = (1024 * 1024).toLong()
 
@@ -111,7 +104,7 @@ class UserAccountFragment : Fragment() {
             }
 
 
-        ref.collection("Users").document("sample1")//UID
+        ref.collection("Users").document(UID)
             .get()
             .addOnSuccessListener { documentSnapshot ->
                 if(documentSnapshot.exists()){
@@ -144,9 +137,10 @@ class UserAccountFragment : Fragment() {
 
         if(data != null && data.getData() != null && resultCode == RESULT_OK){
 
+            val UID = mAuth.currentUser!!.uid
             val dataUri = data.data as Uri
 
-            val storageRef = storage.reference.child("User/sample1")//sample1 should be replace with user login UID
+            val storageRef = storage.reference.child("User/"+UID)//sample1 should be replace with user login UID
 
             if(requestCode == 1){
                 profileImg.setImageURI(dataUri)

@@ -44,7 +44,7 @@ class UserPointAndRedeemReward : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_user_point_and_redeem__reward, container, false)
-        mAuth = FirebaseAuth.getInstance()
+
 
         var context = activity as Context
 
@@ -60,6 +60,7 @@ class UserPointAndRedeemReward : Fragment() {
         rewardName = arrayListOf()
         rewardName.clear()
         rewardImg.clear()
+
         ref.collection("Reward").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
@@ -107,6 +108,7 @@ class UserPointAndRedeemReward : Fragment() {
         rewardName.clear()
         rewardImg.clear()
         if(value.isNullOrEmpty()){
+
             ref.collection("Reward").get()
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
@@ -122,27 +124,28 @@ class UserPointAndRedeemReward : Fragment() {
                     Toast.makeText(context, "Unable to retrieve Reward data!", Toast.LENGTH_SHORT).show()
                 }
         }else{
-        ref.collection("Reward").whereEqualTo(type,value).get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    rewardName.add(document.get("Name").toString())
-                    rewardImg.add(document.id)
+            ref.collection("Reward").whereEqualTo(type,value).get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        rewardName.add(document.get("Name").toString())
+                        rewardImg.add(document.id)
+                    }
+                    layoutMgr = GridLayoutManager(context , 2)
+                    prizeList.layoutManager = layoutMgr
+                    recyclerViewAdapter = RecycleViewAdapter(context,rewardName,rewardImg)
+                    recyclerViewAdapter.notifyDataSetChanged()
+                    prizeList.adapter = recyclerViewAdapter
                 }
-                layoutMgr = GridLayoutManager(context , 2)
-                prizeList.layoutManager = layoutMgr
-                recyclerViewAdapter = RecycleViewAdapter(context,rewardName,rewardImg)
-                recyclerViewAdapter.notifyDataSetChanged()
-                prizeList.adapter = recyclerViewAdapter
+                .addOnFailureListener { exception ->
+                    Toast.makeText(context, "Unable to retrieve Reward data!", Toast.LENGTH_SHORT).show()
+                }
             }
-            .addOnFailureListener { exception ->
-                Toast.makeText(context, "Unable to retrieve Reward data!", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     override fun onStart() {
         super.onStart()
-        val UserRef = ref.collection("Users").document("sample1")
+        val UID = mAuth.currentUser!!.uid
+        val UserRef = ref.collection("Users").document(UID)
 
         UserRef.addSnapshotListener{ snapshot, e ->
             if(snapshot!!.exists()){
@@ -157,7 +160,8 @@ class UserPointAndRedeemReward : Fragment() {
     }
 
     private fun loadContent1(){
-        val profileStorageRef = storage.reference.child("User/sample1/profile.jpg")//sample1 is UID
+        val UID = mAuth.currentUser!!.uid
+        val profileStorageRef = storage.reference.child("User/"+UID+"/profile.jpg")
 
         val ONE_MEGABYTE = (1024 * 1024).toLong()
 

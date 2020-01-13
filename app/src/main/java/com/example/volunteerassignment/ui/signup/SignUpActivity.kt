@@ -2,37 +2,48 @@ package com.example.volunteerassignment.ui.signup
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.*
 import com.example.volunteerassignment.R
-import com.example.volunteerassignment.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.storage.FirebaseStorage
+import com.google.protobuf.Empty
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_signup.*
-import kotlinx.coroutines.handleExceptionViaHandler
-import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var userSpinner: Spinner
     private lateinit var btnRegister: Button
-   // private lateinit var storage: FirebaseStorage
-    private lateinit var database: FirebaseFirestore
+    private lateinit var circlrImageView : CircleImageView
+    private lateinit var dataUri:Uri
+
+    private lateinit var storage: FirebaseStorage
+    private lateinit var ref: FirebaseFirestore
+    private lateinit var mAuth: FirebaseAuth
+
+    val REQUEST_CODE_PROFILE = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_signup)
-        val Goback: ImageButton = findViewById(R.id.img_btn_back)
+
+        ref = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
+        mAuth = FirebaseAuth.getInstance()
+
+        val goback: ImageButton = findViewById(R.id.img_btn_back)
         userSpinner = findViewById(R.id.spinnerUser)
         btnRegister = findViewById(R.id.btnRegister)
-        Goback.setOnClickListener {
+        circlrImageView = findViewById(R.id.uploadphoto_imageview_register)
+
+        dataUri = Uri.EMPTY
+
+        goback.setOnClickListener {
             onBackPressed()
         }
         btnRegister.setOnClickListener {
@@ -43,91 +54,71 @@ class SignUpActivity : AppCompatActivity() {
         btnUploadPhoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, 0)
+            startActivityForResult(intent, REQUEST_CODE_PROFILE)
         }
     }
 
-    var selectedPhotoUrl: Uri? = null
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            selectedPhotoUrl = data.data
 
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUrl)
+        if(data != null && data.getData() != null && resultCode == Activity.RESULT_OK){
 
-            uploadphoto_imageview_register.setImageBitmap(bitmap)
-            btnUploadPhoto.alpha = 0f
-            //val bitmapDrawable = BitmapDrawable(bitmap)
-            //btnUploadPhoto.setBackgroundDrawable(bitmapDrawable)
+            dataUri = data.data as Uri
+
+            if(requestCode == REQUEST_CODE_PROFILE){
+                circlrImageView.setImageURI(dataUri)
+                btnUploadPhoto.alpha = 0f
+            }
+        }else{
+            Toast.makeText(this, "Image Failed", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun createEmailId() {
+        val name = keyinSignupUsername.text.toString()
         val email = keyinSignupEmail.text.toString()
         val password = editSignupPassword.text.toString()
-        var userType = 0
-        userType = userSpinner.selectedItemPosition
+        var userType = userSpinner.selectedItem.toString()
 
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please enter text in email/pw", Toast.LENGTH_SHORT).show()
             return
         }
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (!it.isSuccessful) return@addOnCompleteListener
-                Toast.makeText(this, "Register Successfully", Toast.LENGTH_SHORT).show()
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val UID = mAuth.currentUser!!.uid
 
-                uploadImagetoFirebaseStorage()
-              var UID =  FirebaseAuth.getInstance().uid
+                    //if(userType == "Organizer")
+                    val user = hashMapOf(
+                        "Name" to name,
+                        "Point" to 0,
+                        "Email" to email,
+                        "Type" to userType
+                    )
+                    ref.collection("Users").document(UID)
+                        .set(user).addOnSuccessListener {
 
-                val events = HashMap<String, Any>()
-                events.put("User Type", userType)
-                events.put("UID", UID.toString())
-                events.put("Email", email)
+                            if(dataUri != Uri.EMPTY) {
+                                val storageRef = storage.reference.child("User/" + UID)
 
-                database.collection("Users").document()
-                    .set(events).addOnSuccessListener {
-                        Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show()
-                    }  .addOnFailureListener {
-                        Toast.makeText(this, "Failed to register", Toast.LENGTH_SHORT).show()
-                    }
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to register", Toast.LENGTH_SHORT).show()
-            }
-    }
+                                val profileRef = storageRef.child("profile.jpg")
 
-    private fun uploadImagetoFirebaseStorage() {
-        if (selectedPhotoUrl == null) return
-
-        val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-
-        ref.putFile(selectedPhotoUrl!!)
-            .addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-                    saveUsertoFirebaseDatabase(it.toString())
+                                profileRef.putFile(dataUri).addOnSuccessListener {
+                                    Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(this, "Failed Register1", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
+                        }
+                } else {
+                    Toast.makeText(this, "Failed registered2", Toast.LENGTH_SHORT).show()
                 }
             }
-            .addOnFailureListener {
-
-            }
-
-
     }
 
-    private fun saveUsertoFirebaseDatabase(profileImageUrl: String) {
-        val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseStorage.getInstance().getReference("/users/$uid")
-
-        // val user = User(uid, keyinSignupUsername.text.toString(), profileImageUrl)
-
-        //ref.setValue(user)
-        //.addOnSuccessListener{
-
-    }
 
 //class User(val uid:String,  val username:String, val profileImageUrl:String)
 
