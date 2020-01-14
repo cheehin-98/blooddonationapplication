@@ -4,27 +4,33 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import com.example.volunteerassignment.R
+import kotlinx.android.synthetic.main.activity_organizer_generate_attedance.*
+import kotlin.random.Random
 
 class OrganizerGenerateAttedance : AppCompatActivity() {
 
-    private lateinit var tv1: Button
-    private lateinit var tv2: Button
-    private lateinit var tv3: Button
-    private lateinit var tv4: Button
+    private lateinit var CodeView: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_organizer_generate_attedance)
 
-        tv1.findViewById<View>(R.id.tv1)
-        tv2.findViewById<View>(R.id.tv2)
-        tv3.findViewById<View>(R.id.tv3)
-        tv4.findViewById<View>(R.id.tv4)
-    }
+        CodeView = findViewById(R.id.tv1)
+        val goback: ImageButton = findViewById(R.id.img_btn_back)
+        goback.setOnClickListener {
+            this.finish()
+        }
 
-    private fun randomNumber()
-    {
+        val bundle :Bundle ?=intent.extras
+        if (bundle!=null) {
+            val code = bundle.getString("code")
+
+            CodeView.setText(code)
+        }
 
     }
 }

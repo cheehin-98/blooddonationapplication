@@ -18,12 +18,12 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary">
+            android:background="#fc6565">
 
             <com.google.android.material.tabs.TabItem
                 android:text="@string/organizerCreateEvent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
+                android:layout_width="match_parent" />
 
             <com.google.android.material.tabs.TabItem
                 android:text="@string/organizerUpdateEvent"

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -18,25 +18,34 @@
             android:orientation="vertical"
             android:padding="25dp">
 
+            <ImageButton
+                android:id="@+id/img_btn_backTodayEvent"
+                android:layout_width="57dp"
+                android:layout_height="49dp"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_cancel_black_60dp" />
 
             <ImageView
-                android:id="@+id/event_imageu"
+                android:id="@+id/event_imaget"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="223dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_upload_image" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventTitleu"
+                android:id="@+id/inputEventTitlet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventTitleu"
+                    android:id="@+id/editEventTitlet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/eventTitle"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -44,33 +53,36 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventNumOfParticipateu"
+                    android:id="@+id/inputEventNumOfParticipatet"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
-                    android:enabled="false">
+                    android:enabled="false"
+                    android:focusable="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventNumOfParticipateu"
+                        android:id="@+id/editEventNumOfParticipatet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:hint="@string/eventNumOfParticipate"
-                        android:enabled="false"/>
+                        android:enabled="false"
+                        android:focusable="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventPointu"
+                    android:id="@+id/inputEventPointt"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventPointu"
+                        android:id="@+id/editEventPointt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:hint="@string/eventPoint"
-                        android:enabled="false"/>
+                        android:enabled="false"
+                        android:focusable="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -80,38 +92,30 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventFromDateu"
+                    android:id="@+id/inputEventFromDatet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventFromDateu"
+                        android:id="@+id/editEventFromDatet"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
                         android:cursorVisible="false"
                         android:focusable="false"
                         android:hint="@string/eventFromDate"
-                        android:enabled="false"/>
+                        android:enabled="false" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <ProgressBar
-                    android:id="@+id/progressBaru"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:enabled="false"/>
-
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventToDateu"
+                    android:id="@+id/inputEventToDatet"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventToDateu"
+                        android:id="@+id/editEventToDatet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
@@ -128,13 +132,13 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventFromTimeu"
+                    android:id="@+id/inputEventFromTimet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventFromTimeu"
+                        android:id="@+id/editEventFromTimet"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
@@ -145,13 +149,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventToTimeu"
+                    android:id="@+id/inputEventToTimet"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventToTimeu"
+                        android:id="@+id/editEventToTimet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
@@ -164,55 +168,59 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventAddressu"
+                android:id="@+id/inputEventAddresst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:enabled="false">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventAddressu"
+                    android:id="@+id/editEventAddresst"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/eventAddress"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventVenueu"
+                android:id="@+id/inputEventVenuet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:enabled="false">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventVenueu"
+                    android:id="@+id/editEventVenuet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/eventVenue"/>
+                    android:hint="@string/eventVenue"
+                    android:enabled="false"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventDescriptionu"
+                android:id="@+id/inputEventDescriptiont"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:enabled="false">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventDescriptionu"
+                    android:id="@+id/editEventDescriptiont"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/eventDescription"/>
+                    android:hint="@string/eventDescription"
+                    android:enabled="false"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
-                    android:id="@+id/btnGenerateAttendance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:layout_gravity="center"
-                    android:text="@string/btnGenerateAttendance"
-                    android:background="@color/btnColorRed"
-                    android:textColor="@color/textColor">
-                </Button>
+            <Button
+                android:id="@+id/btnGenerateAttendance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/btnColorRed"
+                android:padding="20dp"
+                android:text="@string/btnGenerateAttendance"
+                android:textColor="@color/textColor"></Button>
 
         </LinearLayout>
     </LinearLayout>

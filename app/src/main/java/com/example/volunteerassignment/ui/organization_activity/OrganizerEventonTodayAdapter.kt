@@ -13,11 +13,11 @@ import androidx.cardview.widget.CardView
 import com.example.volunteerassignment.R
 import com.google.firebase.storage.FirebaseStorage
 
-class RecycleViewAdapters(val context: Context, val EventTitle: ArrayList<String>, private val eventImage: ArrayList<String>, private val eventDate: ArrayList<String>) :
+class RecycleViewAdapters(val context: Context, val eventTitle: ArrayList<String>, private val eventImage: ArrayList<String>, private val eventFromDate: ArrayList<String>, private val eventToDate: ArrayList<String>) :
     RecyclerView.Adapter<RecycleViewAdapters.ImgViewHolder>() {
 
 
-    val Organizer_UID = "wf7aHafXMEP9kpTQZq9QhhqCf9y2"
+    val Organizer_UID = "kfRxZs5pAvdiQk8F67ZfrjgaA9q1"
     val storage = FirebaseStorage.getInstance()
     val ONE_MEGABYTE = (1024 * 1024).toLong()
 
@@ -26,9 +26,11 @@ class RecycleViewAdapters(val context: Context, val EventTitle: ArrayList<String
     }
 
     override fun onBindViewHolder(holder: ImgViewHolder, position: Int) {
-        holder.txtEventDate.text = eventDate[position]
-        holder.txtEventtitle.text = EventTitle[position]
-        val rewardRef= storage.reference.child("Event/Organizer_UID/"+ Organizer_UID +"/"+ eventImage[position]+".jpg")
+        holder.txtEventtitle.text = eventTitle[position]
+        holder.txtEventFromDate.text = eventFromDate[position]
+        holder.txtEventToDate.text = eventToDate[position]
+
+        val rewardRef= storage.reference.child("Event/"+ eventImage[position]+".jpg")
 
         rewardRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
             val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
@@ -54,9 +56,10 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImgViewHolder
     }
 
     class ImgViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val eventImg = view.findViewById<ImageButton>(R.id.event_image2)
-        val txtEventtitle = view.findViewById<TextView>(R.id.eventTitle2)
-        val txtEventDate = view.findViewById<TextView>(R.id.eventDate)
+        val eventImg = view.findViewById<ImageButton>(R.id.event_imaget)
+        val txtEventtitle = view.findViewById<TextView>(R.id.eventTitlet)
+        val txtEventFromDate = view.findViewById<TextView>(R.id.eventFromDatet)
+        val txtEventToDate = view.findViewById<TextView>(R.id.eventToDatet)
         val cardTodayListView = view.findViewById<CardView>(R.id.TodayCardView)
     }
 

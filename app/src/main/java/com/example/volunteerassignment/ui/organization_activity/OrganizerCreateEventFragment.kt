@@ -318,7 +318,6 @@ class OrganizerCreateEventFragment : Fragment() {
                              events.put("Description", setEventDescription)
                              events.put("Orgernizer_UID", organizerUID)
                              events.put("Create Event", eventCreateDate)
-                             events.put("Image Path", mImageUri.toString())
 
                              val progressDialog = ProgressDialog(getContext())
                              progressDialog.setTitle("Inserting")

@@ -133,28 +133,6 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun pickFromGallery(int : Int) {
-
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        val mimeTypes = arrayOf("image/jpeg", "image/png")
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-        startActivityForResult(intent, int)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(data != null && data.getData() != null && resultCode == Activity.RESULT_OK){
-
-            mImageUri = data.data as Uri
-
-            eventImage.setImageURI(mImageUri)
-
-        }
-    }
-
     private fun getEventFromDate()
     {
 
@@ -293,6 +271,27 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
         }
     }
 
+    private fun pickFromGallery(int : Int) {
+
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        val mimeTypes = arrayOf("image/jpeg", "image/png")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        startActivityForResult(intent, int)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(data != null && data.getData() != null && resultCode == Activity.RESULT_OK){
+
+            mImageUri = data.data as Uri
+
+            eventImage.setImageURI(mImageUri)
+
+        }
+    }
+
     private fun insertDatabase()
     {
         val setEventTitle = eventTitle.text.toString()
@@ -337,6 +336,12 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
                                 updateRef.update("Venue", setEventVenue)
                                 updateRef.update("Description", setEventDescription)
                                 updateRef.update("Event Last Update ", setEventUpdateDate)
+
+                                    val storageRef =
+                                    storage.reference.child("Event/")
+                                val profileRef = storageRef.child(imgID+".jpg")
+                                profileRef.putFile(mImageUri)// update image
+
 
                                 Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show()
                                 onBackPressed()
