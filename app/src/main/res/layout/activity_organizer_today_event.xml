@@ -20,19 +20,19 @@
 
 
             <ImageView
-                android:id="@+id/event_imageu"
+                android:id="@+id/event_imaget"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_upload_image" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventTitleu"
+                android:id="@+id/inputEventTitlet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventTitleu"
+                    android:id="@+id/editEventTitlet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/eventTitle"
@@ -44,13 +44,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventNumOfParticipateu"
+                    android:id="@+id/inputEventNumOfParticipatet"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventNumOfParticipateu"
+                        android:id="@+id/editEventNumOfParticipatet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -59,13 +59,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventPointu"
+                    android:id="@+id/inputEventPointt"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventPointu"
+                        android:id="@+id/editEventPointt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -80,13 +80,13 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventFromDateu"
+                    android:id="@+id/inputEventFromDatet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventFromDateu"
+                        android:id="@+id/editEventFromDatet"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
@@ -96,22 +96,14 @@
                         android:enabled="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <ProgressBar
-                    android:id="@+id/progressBaru"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:enabled="false"/>
-
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventToDateu"
+                    android:id="@+id/inputEventToDatet"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventToDateu"
+                        android:id="@+id/editEventToDatet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
@@ -128,13 +120,13 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventFromTimeu"
+                    android:id="@+id/inputEventFromTimet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventFromTimeu"
+                        android:id="@+id/editEventFromTimet"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
@@ -145,13 +137,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputEventToTimeu"
+                    android:id="@+id/inputEventToTimet"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     android:enabled="false">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editEventToTimeu"
+                        android:id="@+id/editEventToTimet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="true"
@@ -164,13 +156,13 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventAddressu"
+                android:id="@+id/inputEventAddresst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:enabled="false">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventAddressu"
+                    android:id="@+id/editEventAddresst"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/eventAddress"
@@ -178,29 +170,31 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventVenueu"
+                android:id="@+id/inputEventVenuet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:enabled="false">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventVenueu"
+                    android:id="@+id/editEventVenuet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/eventVenue"/>
+                    android:hint="@string/eventVenue"
+                    android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEventDescriptionu"
+                android:id="@+id/inputEventDescriptiont"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:enabled="false">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editEventDescriptionu"
+                    android:id="@+id/editEventDescriptiont"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/eventDescription"/>
+                    android:hint="@string/eventDescription"
+                    android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
                 <Button

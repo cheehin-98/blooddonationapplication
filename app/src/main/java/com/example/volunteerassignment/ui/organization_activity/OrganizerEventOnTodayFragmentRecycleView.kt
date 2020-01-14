@@ -67,8 +67,8 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
         return root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         clearArrayList()
         val activity = activity as Context
         database.collection("Event").get()

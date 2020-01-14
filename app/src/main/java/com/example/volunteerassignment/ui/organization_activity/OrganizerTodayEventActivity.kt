@@ -25,18 +25,9 @@ class OrganizerTodayEventActivity : AppCompatActivity() {
     private lateinit var address : TextView
     private lateinit var venue : TextView
     private lateinit var description : TextView
-    private lateinit var btnUploadEventImage : Button
-    private lateinit var btnUpdateEvent : Button
-    private lateinit var btnDeleteEvent : Button
     private lateinit var eventImage: ImageView
-    private lateinit var chkTermAndCondition: CheckBox
-    private lateinit var mImageUri: Uri
+    private lateinit var btnGenAttendance: Button
     private lateinit var imgID: String
-    private val c = Calendar.getInstance()
-    private val year = c.get(Calendar.YEAR)
-    private val month = c.get(Calendar.MONTH)
-    private val day = c.get(Calendar.DAY_OF_MONTH)
-
     private lateinit var storage: FirebaseStorage
     private lateinit var database: FirebaseFirestore
 
@@ -48,39 +39,37 @@ class OrganizerTodayEventActivity : AppCompatActivity() {
 
         imgID = intent.getStringExtra("imgID")
 
-       /* btnGenAttendance.findViewById<View>(R.id.btnGenerateAttendance)
+
+       btnGenAttendance.findViewById<View>(R.id.btnGenerateAttendance)
 
         btnGenAttendance.setOnClickListener {
             val intent = Intent(this, OrganizerGenerateAttedance::class.java)
             intent.putExtra("imgID", imgID)
             this.startActivity(intent)
-        }*/
+        }
 
     }
 
     override fun onStart() {
         super.onStart()
-        fromDate = findViewById(R.id.editEventFromDateu)
-        toDate = findViewById(R.id.editEventToDateu)
-        fromTime = findViewById(R.id.editEventFromTimeu)
-        toTime = findViewById(R.id.editEventToTimeu)
-        eventTitle = findViewById(R.id.editEventTitleu)
-        numOfParti = findViewById(R.id.editEventNumOfParticipateu)
-        point = findViewById(R.id.editEventPointu)
-        address = findViewById(R.id.editEventAddressu)
-        venue = findViewById(R.id.editEventVenueu)
-        description = findViewById(R.id.editEventDescriptionu)
-        eventImage = findViewById(R.id.event_imageu)
-        btnUploadEventImage = findViewById(R.id.btnUploadEventImageu)
-        btnUpdateEvent = findViewById(R.id.btnUpdateEventu)
-        btnDeleteEvent = findViewById(R.id.btnDeleteEventu)
-        chkTermAndCondition = findViewById(R.id.ckhTermAndConditionu)
+        fromDate = findViewById(R.id.editEventFromDatet)
+        toDate = findViewById(R.id.editEventToDatet)
+        fromTime = findViewById(R.id.editEventFromTimet)
+        toTime = findViewById(R.id.editEventToTimet)
+        eventTitle = findViewById(R.id.editEventTitlet)
+        numOfParti = findViewById(R.id.editEventNumOfParticipatet)
+        point = findViewById(R.id.editEventPointt)
+        address = findViewById(R.id.editEventAddresst)
+        venue = findViewById(R.id.editEventVenuet)
+        description = findViewById(R.id.editEventDescriptiont)
+        eventImage = findViewById(R.id.event_imaget)
+
 
         storage = FirebaseStorage.getInstance()
         database = FirebaseFirestore.getInstance()
         val ONE_MEGABYTE = (1024 * 1024).toLong()
         val UserRef = database.collection("Event").document(imgID)
-        val rewardRef= storage.reference.child("Event/Organizer_UID/"+ Organizer_UID +"/"+ imgID+".jpg")
+        val rewardRef= storage.reference.child("Event/"+ imgID+".jpg")
 
 
         rewardRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
