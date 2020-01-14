@@ -48,6 +48,7 @@ class EventViewAdapter (val context: Context, val eventName: ArrayList<String>, 
         holder.eventImg.setOnClickListener {
             val intent =Intent(context,eventActivityDetails::class.java)
             intent.putExtra("EventID",eventImg[position])
+            intent.putExtra("Type","home")
             context.startActivity(intent)
         }
     }

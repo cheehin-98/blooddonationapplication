@@ -3,11 +3,13 @@ package com.example.volunteerassignment.ui.home
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.volunteerassignment.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
@@ -16,6 +18,7 @@ class eventActivityDetails : AppCompatActivity() {
 
     private lateinit var storage: FirebaseStorage
     private lateinit var ref: FirebaseFirestore
+    private lateinit var mAuth: FirebaseAuth
 
     private lateinit var eventTitle: TextView
     private lateinit var evenID:TextView
@@ -36,9 +39,13 @@ class eventActivityDetails : AppCompatActivity() {
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
+        mAuth = FirebaseAuth.getInstance()
+
 
         val extras = this.intent.extras
         val eventID = extras!!.getString("EventID")
+
+        val type = extras.getString("Type")
 
 
         eventTitle= findViewById(R.id.event_title)
@@ -82,5 +89,35 @@ class eventActivityDetails : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
             }
+
+
+
+        btnRegis = findViewById(R.id.btn_Regis)
+        if(type=="home") {
+            btnRegis.setOnClickListener {
+                val currentuser = mAuth.currentUser
+
+                if (currentuser != null) {
+
+                    ref.collection("Event_Go").whereEqualTo("Event_ID", eventID)
+                        .whereEqualTo("UID", currentuser?.uid)
+                        .get()
+                        .addOnSuccessListener { documentSnapshot ->
+                            if (documentSnapshot.isEmpty) {
+                                val eventGo = hashMapOf(
+                                    "Event_ID" to eventID,
+                                    "Sign_In" to "No",
+                                    "UID" to currentuser?.uid
+                                )
+                                ref.collection("Event_Go")
+                                    .add(eventGo)
+                            }
+                            this.finish()
+                        }
+                }
+            }
+        }else if (type=="activity") {
+            btnRegis.visibility = View.GONE
+        }
     }
 }

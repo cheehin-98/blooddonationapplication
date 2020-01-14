@@ -18,7 +18,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var storage: FirebaseStorage
     private lateinit var ref: FirebaseFirestore
-    private lateinit var mAuth: FirebaseAuth
     private lateinit var eventList : RecyclerView
 
     private lateinit var layoutMgr : RecyclerView.LayoutManager

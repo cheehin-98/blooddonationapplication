@@ -26,7 +26,7 @@ class ActivityHistory : Fragment() {
     private lateinit var activityList: RecyclerView
 
     private lateinit var layoutMgr: RecyclerView.LayoutManager
-    private lateinit var actViewAdapter: ActViewAdapter
+    private lateinit var actViewAdapter: ActivityHistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,10 +54,31 @@ class ActivityHistory : Fragment() {
 
                 layoutMgr = LinearLayoutManager(c)
                 activityList.layoutManager = layoutMgr
-                actViewAdapter = ActViewAdapter(c, eventID)
+                actViewAdapter = ActivityHistoryAdapter(c, eventID)
                 activityList.adapter = actViewAdapter
 
             }
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val c = activity as Context
+
+        val currentuser = mAuth.currentUser
+        eventID.clear()
+        ref.collection("Event_Go").whereEqualTo("UID", currentuser?.uid).whereEqualTo("Sign_In", "Yes")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    eventID.add(document.get("Event_ID").toString())
+                }
+
+                layoutMgr = LinearLayoutManager(c)
+                activityList.layoutManager = layoutMgr
+                actViewAdapter = ActivityHistoryAdapter(c, eventID)
+                activityList.adapter = actViewAdapter
+
+            }
     }
 }

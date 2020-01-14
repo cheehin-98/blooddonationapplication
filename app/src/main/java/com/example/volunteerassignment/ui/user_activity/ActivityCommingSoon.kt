@@ -13,16 +13,16 @@ import com.example.volunteerassignment.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import java.util.*
-import kotlin.collections.ArrayList
-import java.text.SimpleDateFormat
 import java.time.LocalDate
+import kotlin.collections.ArrayList
 import java.time.format.DateTimeFormatter
+
 
 
 class ActivityCommingSoon : Fragment() {
 
     private lateinit var eventID: ArrayList<String>
+    private lateinit var eventGoID: ArrayList<String>
     private lateinit var storage: FirebaseStorage
     private lateinit var ref: FirebaseFirestore
     private lateinit var mAuth: FirebaseAuth
@@ -30,7 +30,7 @@ class ActivityCommingSoon : Fragment() {
     private lateinit var activityList : RecyclerView
 
     private lateinit var layoutMgr : RecyclerView.LayoutManager
-    private lateinit var actViewAdapter : ActViewAdapter
+    private lateinit var activityCommingSoon: ActivityCommingSoonAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,35 +46,24 @@ class ActivityCommingSoon : Fragment() {
         val c = activity as Context
 
         eventID = arrayListOf()
-
-        val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
-        val today = LocalDate.parse(LocalDate.now().toString(), formatter)
+        eventGoID = arrayListOf()
 
 
-        ref.collection("Event_Go").whereEqualTo("UID", "sample1").whereEqualTo("Sign_In", "No")
+        val currentuser = mAuth.currentUser
+        ref.collection("Event_Go").whereEqualTo("UID", currentuser?.uid).whereEqualTo("Sign_In", "No")
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents) {
-
-                    ref.collection("Event").document(doc.get("Event_ID").toString())
-                        .get()
-                        .addOnSuccessListener { document ->
-                            val eventDate = LocalDate.parse(document.get("From Date").toString(), formatter)
-
-                            if(today>eventDate){
-                                eventID.add(doc.get("Event ID").toString())
-                            }
-                        }
+                    eventID.add(doc.get("Event_ID").toString())
+                    eventGoID.add(doc.id)
 
                 }
                 layoutMgr = LinearLayoutManager(c)
                 activityList.layoutManager = layoutMgr
-                actViewAdapter = ActViewAdapter(c, eventID)
-                activityList.adapter = actViewAdapter
+                activityCommingSoon = ActivityCommingSoonAdapter(c, eventID,eventGoID)
+                activityList.adapter = activityCommingSoon
 
             }
-
-
         return root
     }
 

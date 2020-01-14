@@ -16,7 +16,7 @@
     <string name="user_menu_myActivity">My Activity</string>
     <string name="user_menu_PointAndRedeem">Point And Redeem</string>
     <string name="user_menu_myAccount">My Account</string>
-    <string name="btn_Register">Attendance</string>
+    <string name="btn_Register">Register</string>
 
     <!--Setting-->
     <string name="menu_setting_HelpAndFeedback">Help And Feedback</string>

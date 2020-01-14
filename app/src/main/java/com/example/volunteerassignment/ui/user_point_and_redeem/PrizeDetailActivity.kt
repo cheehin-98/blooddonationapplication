@@ -108,12 +108,13 @@ class PrizeDetailActivity : AppCompatActivity() {
                 ref.collection("Users").document(UID).update("Point", newPoint)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Successful Update Point!", Toast.LENGTH_SHORT).show()
+                        val currentuser = mAuth.currentUser
                         val history = hashMapOf(
                             "Reward_ID" to prizeID,
                             "Name" to name.text.toString(),
                             "Point_Used" to requiredPoint.text.toString().toInt(),
                             "Redeem_Date" to currentTime.toString(),
-                            "UID" to "sample1"
+                            "UID" to currentuser?.uid
 
                         )
                         ref.collection("History_Reward")

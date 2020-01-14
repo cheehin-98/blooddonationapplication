@@ -27,6 +27,8 @@ class UserActivityFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_user_my_activity, container, false)
 
+        tabLayout = root.findViewById(R.id.tabLayout)
+        viewpager = root.findViewById(R.id.viewPager)
 
         setupPager()
         integrateTabWithPager()
@@ -46,26 +48,22 @@ class UserActivityFragment : Fragment() {
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                1 -> {
-                    ActivityCommingSoon()
-                }
-                2 ->{
+                1 ->{
                     ActivityHistory()
                 }else -> {
-                    ActivityToday()
+                    ActivityCommingSoon()
                 }
             }
         }
 
         override fun getCount(): Int { // number of views
-            return 3
+            return 2
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
             val TAB_TITLES = arrayOf(
-                "Today",
-                "Comming Soon",
-                "History"
+                "Event",
+                "Event History"
             )
             return TAB_TITLES[position]
         }

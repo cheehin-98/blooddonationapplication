@@ -54,8 +54,8 @@ class UserPointAndRedeemHistory : Fragment() {
         return root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         val c = activity as Context
         rewardName.clear()
         rewardPoint.clear()
