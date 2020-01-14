@@ -47,7 +47,6 @@ class OrganizerUpdateEventFragmentRecycleView : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_organization_update_event_recycleview, container, false)
         mAuth = FirebaseAuth.getInstance()
-        val activity = activity as Context
 
         storage = FirebaseStorage.getInstance()
         database = FirebaseFirestore.getInstance()
@@ -58,25 +57,16 @@ class OrganizerUpdateEventFragmentRecycleView : Fragment() {
         eventFromDate = arrayListOf()
         eventToDate = arrayListOf()
 
-        mRecyclerView = root.findViewById(R.id.organization_update_event_recycleView)
-        layoutMgr = LinearLayoutManager(context)
-        mRecyclerView.layoutManager = layoutMgr
-        recyclerViewAdapter = RecycleViewAdapter(activity,eventTitle,eventImage,eventFromDate,eventToDate)
-        recyclerViewAdapter.notifyDataSetChanged()
-        mRecyclerView.adapter = recyclerViewAdapter
-
         return root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         clearArrayList()
         val activity = activity as Context
         database.collection("Event").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    if(document.id != null)
-                    {
                         /*if( document.get("From Date").toString().isNotBlank())
                         {
                             var  chkFromDate = document.get("From Date").toString()
@@ -102,13 +92,13 @@ class OrganizerUpdateEventFragmentRecycleView : Fragment() {
                   }
                   else {
                       Toast.makeText(context, "No record!", Toast.LENGTH_SHORT).show()*/
-                    }
                 }
-                layoutMgr = LinearLayoutManager(context)
+                layoutMgr = LinearLayoutManager(activity)
                 mRecyclerView.layoutManager = layoutMgr
                 recyclerViewAdapter = RecycleViewAdapter(activity,eventTitle,eventImage,eventFromDate,eventToDate)
                 recyclerViewAdapter.notifyDataSetChanged()
                 mRecyclerView.adapter = recyclerViewAdapter
+
             }.addOnFailureListener {
                 Toast.makeText(context, "Unable to retrieve data 3!", Toast.LENGTH_SHORT).show()
             }
