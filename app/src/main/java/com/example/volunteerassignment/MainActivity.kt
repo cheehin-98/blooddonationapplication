@@ -25,12 +25,12 @@ import com.example.volunteerassignment.ui.login.LoginActivity
 import com.example.volunteerassignment.ui.signup.SignUpActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import org.w3c.dom.Text
 
 
 class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
     private lateinit var mAuth: FirebaseAuth
     private lateinit var ref: FirebaseFirestore
 
@@ -77,10 +77,10 @@ class MainActivity : AppCompatActivity(){
     fun Logout(view: View){
         FirebaseAuth.getInstance().signOut()
         updateUI()
-        Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show()
-//        finish()
-//        val intent = Intent(this,MainActivity::class.java)
-//        startActivity(intent)
+        Toast.makeText(this, "LogOut Successful", Toast.LENGTH_SHORT).show()
+        finish()
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(){
         updateUI()
     }
 
-    fun updateUI() {
+    fun updateUI(){
         val currentuser = mAuth.currentUser
         val navView: NavigationView = findViewById(R.id.nav_view)
 
@@ -113,46 +113,36 @@ class MainActivity : AppCompatActivity(){
         val login = headerLayout.findViewById<Button>(R.id.btnLogin)
         val logout = headerLayout.findViewById<Button>(R.id.btnLogout)
         val signUp = headerLayout.findViewById<Button>(R.id.btnSignUp)
-        val txtEmail = headerLayout.findViewById<TextView>(R.id.nav_email)
-
-        if (currentuser != null) {
+        if(currentuser != null){
             login.visibility = View.GONE
             logout.visibility = View.VISIBLE
             signUp.visibility = View.GONE
 
-            val bundle: Bundle? = intent.extras
-            if (bundle != null) {
-                val email = bundle.getString("email")
-                txtEmail.text = email.toString()
-            }
-                ref.collection("Users").document(currentuser?.uid)
-                    .get()
-                    .addOnSuccessListener { documentSnapshot ->
-                        if (documentSnapshot.exists()) {
-                            if (documentSnapshot.get("Type").toString() == "Volunteer") {
-                                val userNavigate = drawer.setGroupVisible(R.id.user_navigate, true)
-                                val organizerNavigate =
-                                    drawer.setGroupVisible(R.id.organization_navigate, false)
-                                //userNavigate.run {  }
+            ref.collection("Users").document(currentuser?.uid)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if(documentSnapshot.exists()){
+                        if(documentSnapshot.get("Type").toString() =="Volunteer"){
+                            val userNavigate = drawer.setGroupVisible(R.id.user_navigate,true)
+                            val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,false)
+                            //userNavigate.run {  }
 
-                            } else if (documentSnapshot.get("Type").toString() == "Organizer") {
-                                val organizerNavigate =
-                                    drawer.setGroupVisible(R.id.organization_navigate, true)
-                                val userNavigate = drawer.setGroupVisible(R.id.user_navigate, false)
-                                //organizerNavigate.setVisible(true)
-                            }
+                        }else if(documentSnapshot.get("Type").toString() =="Organizer"){
+                            val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,true)
+                            val userNavigate = drawer.setGroupVisible(R.id.user_navigate,false)
+                            //organizerNavigate.setVisible(true)
                         }
                     }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Unable to update UI!", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                login.visibility = View.VISIBLE
-                logout.visibility = View.GONE
-                signUp.visibility = View.VISIBLE
-                val userNavigate = drawer.setGroupVisible(R.id.user_navigate, false)
-                val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate, false)
-                txtEmail.text = ""
-            }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Unable to update UI!", Toast.LENGTH_SHORT).show()
+                }
+        }else{
+            login.visibility = View.VISIBLE
+            logout.visibility = View.GONE
+            signUp.visibility = View.VISIBLE
+            val userNavigate = drawer.setGroupVisible(R.id.user_navigate,false)
+            val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,false)
+        }
     }
 }
