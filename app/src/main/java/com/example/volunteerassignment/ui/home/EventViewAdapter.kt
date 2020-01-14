@@ -35,26 +35,26 @@ class EventViewAdapter (val context: Context, val eventName: ArrayList<String>, 
 
         holder.txtEvent.text = eventName[position]
 
-        val eventRef= storage.reference.child("Event/Organizer_UID/GiagDmqIQJZZOOHPHqhnbAedGLh1/"+eventImg[position]+".jpg")
+        val eventRef= storage.reference.child("Event/"+eventImg[position]+".jpg")
 
         eventRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
             val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
             holder.eventImg.setImageBitmap(bmp)
-        }
+            }
             .addOnFailureListener {
                 holder.eventImg.setImageResource(R.drawable.gold_trophy)
             }
 
         holder.eventImg.setOnClickListener {
             val intent =Intent(context,eventActivityDetails::class.java)
-            intent.putExtra("prizeID",eventImg[position])
+            intent.putExtra("EventID",eventImg[position])
             context.startActivity(intent)
         }
     }
 
     class EnventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val eventImg = view.findViewById<ImageButton>(R.id.eventImg)
-        val txtEvent = view.findViewById<TextView>(R.id.eventtxt)
+        val txtEvent = view.findViewById<TextView>(R.id.eventTxt)
 
     }
 }

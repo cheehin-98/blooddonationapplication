@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single" android:id="@+id/user_navigate" android:visible="true">
-
+    <group android:checkableBehavior="single" android:id="@+id/def" android:visible="true">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
+    </group>
+    <group android:checkableBehavior="single" android:id="@+id/user_navigate" android:visible="false">
+
         <item
             android:id="@+id/nav_user_notification"
             android:icon="@drawable/ic_menu_notifications"
@@ -27,7 +29,7 @@
             android:title="@string/user_menu_myAccount" /><!--slideshow, ic_menu_manage, menu_tools-->
     </group>
 
-    <group android:checkableBehavior="single" android:id="@+id/organization_navigate" android:visible="true">
+    <group android:checkableBehavior="single" android:id="@+id/organization_navigate" android:visible="false">
         <item
             android:id="@+id/nav_organizer_notification"
             android:icon="@drawable/ic_menu_notifications"

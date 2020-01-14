@@ -5,8 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.*
 import com.example.volunteerassignment.R
+import com.example.volunteerassignment.ui.login.LoginActivity
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -42,12 +45,10 @@ class SignUpActivity : AppCompatActivity() {
         dataUri = Uri.EMPTY
 
         goback.setOnClickListener {
-            onBackPressed()
+            this.finish()
         }
         btnRegister.setOnClickListener {
             createEmailId()
-            // linktoLogin()
-            clearText()
         }
         btnUploadPhoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
@@ -87,14 +88,22 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val UID = mAuth.currentUser!!.uid
+                    var user : HashMap<String,Any>
+                    if(userType == "Organizer"){
+                        user = hashMapOf(
+                            "Name" to name,
+                            "Email" to email,
+                            "Type" to userType
+                        )
+                    }else{
+                        user = hashMapOf(
+                            "Name" to name,
+                            "Point" to 0,
+                            "Email" to email,
+                            "Type" to userType
+                        )
+                    }
 
-                    //if(userType == "Organizer")
-                    val user = hashMapOf(
-                        "Name" to name,
-                        "Point" to 0,
-                        "Email" to email,
-                        "Type" to userType
-                    )
                     ref.collection("Users").document(UID)
                         .set(user).addOnSuccessListener {
 
@@ -106,36 +115,27 @@ class SignUpActivity : AppCompatActivity() {
                                 profileRef.putFile(dataUri).addOnSuccessListener {
                                     Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show()
                                 }.addOnFailureListener {
-                                    Toast.makeText(this, "Failed Register1", Toast.LENGTH_SHORT)
-                                        .show()
+                                    Toast.makeText(this, "Failed Register1", Toast.LENGTH_SHORT).show()
                                 }
                             }
+                            val intent = Intent(applicationContext, LoginActivity::class.java)
+                            intent.putExtra("Email",email)
+                            startActivity(intent)
+                            this.finish()
                         }
                 } else {
                     Toast.makeText(this, "Failed registered2", Toast.LENGTH_SHORT).show()
                 }
             }
     }
-
-
-//class User(val uid:String,  val username:String, val profileImageUrl:String)
-
     fun clearText() {
         keyinSignupEmail.text = null
         keyinSignupUsername.text = null
         editSignupPassword.text = null
-        //uploadphoto_imageview_register.clearFocus()
     }
 
 }
 
-
-    //fun linktoLogin() {
-       // btnRegister.setOnClickListener {
-          //  val intent: Intent = Intent(applicationContext, LoginActivity::class.java)
-          //  startActivity(intent)
-       // }
-   // }
 
 
 

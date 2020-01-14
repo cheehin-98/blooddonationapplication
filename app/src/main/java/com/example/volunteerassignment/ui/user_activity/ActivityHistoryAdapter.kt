@@ -15,17 +15,16 @@ import com.example.volunteerassignment.ui.home.eventActivityDetails
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
-import kotlin.collections.ArrayList
 
-class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
-    RecyclerView.Adapter<ActViewAdapter.TxtViewHolder>() {
+class ActivityHistoryAdapter (val context: Context, val eventID: ArrayList<String>) :
+    RecyclerView.Adapter<ActivityHistoryAdapter.TxtViewHolder>() {
 
 
     private lateinit var storage: FirebaseStorage
     private lateinit var ref: FirebaseFirestore
     val ONE_MEGABYTE = (1024 * 1024).toLong()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActViewAdapter.TxtViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityHistoryAdapter.TxtViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater
             .inflate(R.layout.my_activity_event_single, parent, false)
@@ -36,7 +35,7 @@ class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
         return eventID.size
     }
 
-    override fun onBindViewHolder(holder: ActViewAdapter.TxtViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ActivityHistoryAdapter.TxtViewHolder, position: Int) {
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
@@ -53,7 +52,7 @@ class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
                 holder.txtDuration.text = document.get("From Date").toString() + document.get("To Date").toString()
             }
 
-        val eventImgRef = storage.reference.child("Event/Organizer_UID/GiagDmqIQJZZOOHPHqhnbAedGLh1/" + eventID.toString() + ".jpg")
+        val eventImgRef = storage.reference.child("Event/" + eventID.toString() + ".jpg")
 
 
 
