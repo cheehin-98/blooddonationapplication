@@ -2,7 +2,6 @@ package com.example.volunteerassignment.ui.user_point_and_redeem
 
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment

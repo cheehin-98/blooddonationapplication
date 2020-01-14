@@ -74,18 +74,17 @@ class MainActivity : AppCompatActivity(){
         startActivity(intent)
 
    }
-//    fun LinktoSignup(view: View){
-//    val intent = Intent(this, SignUpActivity::class.java)
-//
-//    }
+    fun Logout(view: View){
+        FirebaseAuth.getInstance().signOut()
+        updateUI()
+//        finish()
+//        val intent = Intent(this,MainActivity::class.java)
+//        startActivity(intent)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-        val logout = findViewById<View>(R.id.action_settings)
-
-
         return true
     }
 
@@ -101,33 +100,48 @@ class MainActivity : AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
+        updateUI()
+    }
+
+    fun updateUI(){
         val currentuser = mAuth.currentUser
         val navView: NavigationView = findViewById(R.id.nav_view)
 
         val drawer: Menu = navView.menu
-
+        val headerLayout = navView.getHeaderView(0)
+        val login = headerLayout.findViewById<Button>(R.id.btnLogin)
+        val logout = headerLayout.findViewById<Button>(R.id.btnLogout)
+        val signUp = headerLayout.findViewById<Button>(R.id.btnSignUp)
         if(currentuser != null){
+            login.visibility = View.GONE
+            logout.visibility = View.VISIBLE
+            signUp.visibility = View.GONE
 
-        ref.collection("Users").document(currentuser?.uid)
-            .get()
-            .addOnSuccessListener { documentSnapshot ->
-                if(documentSnapshot.exists()){
-                    if(documentSnapshot.get("Type").toString() =="Volunteer"){
-                        val userNavigate = drawer.setGroupVisible(R.id.user_navigate,true)
-                        val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,false)
-                        //userNavigate.run {  }
+            ref.collection("Users").document(currentuser?.uid)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if(documentSnapshot.exists()){
+                        if(documentSnapshot.get("Type").toString() =="Volunteer"){
+                            val userNavigate = drawer.setGroupVisible(R.id.user_navigate,true)
+                            val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,false)
+                            //userNavigate.run {  }
 
-                    }else if(documentSnapshot.get("Type").toString() =="Organizer"){
-                        val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,true)
-                        val userNavigate = drawer.setGroupVisible(R.id.user_navigate,false)
-                        //organizerNavigate.setVisible(true)
+                        }else if(documentSnapshot.get("Type").toString() =="Organizer"){
+                            val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,true)
+                            val userNavigate = drawer.setGroupVisible(R.id.user_navigate,false)
+                            //organizerNavigate.setVisible(true)
+                        }
                     }
                 }
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Unable to update UI!", Toast.LENGTH_SHORT).show()
-            }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Unable to update UI!", Toast.LENGTH_SHORT).show()
+                }
+        }else{
+            login.visibility = View.VISIBLE
+            logout.visibility = View.GONE
+            signUp.visibility = View.VISIBLE
+            val userNavigate = drawer.setGroupVisible(R.id.user_navigate,false)
+            val organizerNavigate = drawer.setGroupVisible(R.id.organization_navigate,false)
         }
-
     }
 }

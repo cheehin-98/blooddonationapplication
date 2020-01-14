@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="TextView"
+                android:text="Name:"
                 app:layout_constraintStart_toEndOf="@+id/profileImg"
                 app:layout_constraintTop_toTopOf="@+id/profileImg" />
 

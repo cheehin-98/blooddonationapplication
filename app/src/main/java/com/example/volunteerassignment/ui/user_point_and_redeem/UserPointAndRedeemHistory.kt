@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.volunteerassignment.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
@@ -26,6 +27,7 @@ class UserPointAndRedeemHistory : Fragment() {
 
     private lateinit var storage: FirebaseStorage
     private lateinit var ref: FirebaseFirestore
+    private lateinit var mAuth: FirebaseAuth
 
     private lateinit var prizeHisList : RecyclerView
 
@@ -40,6 +42,7 @@ class UserPointAndRedeemHistory : Fragment() {
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
+        mAuth = FirebaseAuth.getInstance()
 
         val context = activity as Context
         prizeHisList= root.findViewById(R.id.prizeHisRecycle)
@@ -58,7 +61,8 @@ class UserPointAndRedeemHistory : Fragment() {
         rewardPoint.clear()
         rewardDate.clear()
         rewardID.clear()
-        ref.collection("History_Reward").whereEqualTo("UID","sample1").get()
+        val currentuser = mAuth.currentUser
+        ref.collection("History_Reward").whereEqualTo("UID",currentuser?.uid).get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     rewardName.add(document.get("Name").toString())
@@ -73,7 +77,7 @@ class UserPointAndRedeemHistory : Fragment() {
                 prizeHisList.adapter = listViewAdapter
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(c, "Unable to retrieve History data!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(c, "No History data!", Toast.LENGTH_SHORT).show()
             }
     }
 
