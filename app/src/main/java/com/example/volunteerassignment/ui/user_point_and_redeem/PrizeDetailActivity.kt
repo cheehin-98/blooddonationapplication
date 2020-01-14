@@ -24,6 +24,7 @@ class PrizeDetailActivity : AppCompatActivity() {
     private lateinit var imgPrize : ImageView
     private lateinit var name : TextView
     private lateinit var requiredPoint:TextView
+    private lateinit var category:TextView
     private lateinit var redeemBtn:Button
     var currPoint =0
 
@@ -38,6 +39,7 @@ class PrizeDetailActivity : AppCompatActivity() {
         imgPrize = findViewById(R.id.prizeImage)
         name = findViewById(R.id.txtName)
         requiredPoint = findViewById(R.id.txtPoint)
+        category = findViewById(R.id.txtCat)
         val extras = this.intent.extras
         val prizeID = extras!!.getString("prizeID")
         val call = extras.getString("Call")
@@ -64,6 +66,7 @@ class PrizeDetailActivity : AppCompatActivity() {
                 if (documentSnapshot.exists()) {
                     name.text =(documentSnapshot.get("Name").toString())
                     requiredPoint.text=(documentSnapshot.get("Point").toString())
+                    category.text = (documentSnapshot.get("Category").toString())
                 } else {
                     Toast.makeText(this, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
                 }

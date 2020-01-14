@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.volunteerassignment.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.time.LocalDate
@@ -24,6 +25,7 @@ class ActivityToday : Fragment() {
     private lateinit var eventID: ArrayList<String>
     private lateinit var storage: FirebaseStorage
     private lateinit var ref: FirebaseFirestore
+    private lateinit var mAuth: FirebaseAuth
 
     private lateinit var activityList : RecyclerView
 
@@ -40,6 +42,8 @@ class ActivityToday : Fragment() {
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
+        mAuth =  FirebaseAuth.getInstance()
+
         activityList= root.findViewById(R.id.activityRecycle)
         val c = activity as Context
         eventID = arrayListOf()

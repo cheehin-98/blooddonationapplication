@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.volunteerassignment.R
 import com.example.volunteerassignment.ui.home.eventActivityDetails
-import com.example.volunteerassignment.ui.user_point_and_redeem.PrizeDetailActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
@@ -29,7 +28,7 @@ class ActViewAdapter (val context: Context, val eventID: ArrayList<String>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActViewAdapter.TxtViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater
-            .inflate(R.layout.my_activity_single, parent, false)
+            .inflate(R.layout.my_activity_event_single, parent, false)
         return TxtViewHolder(view)
     }
 

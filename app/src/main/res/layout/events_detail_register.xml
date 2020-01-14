@@ -19,15 +19,13 @@
         android:id="@+id/event_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
-        android:text="TARC SMART CAMP"
-        app:layout_constraintEnd_toStartOf="@+id/event_id"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_event"
         android:fontFamily="@font/roboto"
-        android:textColor="#000000"/>
+        android:text="TARC SMART CAMP"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_event" />
 
     <TextView
         android:id="@+id/event_id"
@@ -35,65 +33,48 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="148dp"
-        android:text="ID:  "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_event"
         android:fontFamily="@font/roboto"
-        android:textColor="#000000"/>
+        android:text="ID:  "
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/event_title"
+        app:layout_constraintTop_toBottomOf="@+id/image_event" />
 
     <TextView
         android:id="@+id/event_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="144dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
         android:text="Date and Time"
-        app:layout_constraintEnd_toStartOf="@+id/event_id"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_title"
-        android:fontFamily="@font/roboto"
-        android:textColor="#000000"/>
-
-    <TextView
-        android:id="@+id/event_days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="32dp"
-        android:text="Days:"
-        app:layout_constraintEnd_toStartOf="@+id/no_of_day"
-        app:layout_constraintStart_toEndOf="@+id/event_date_time"
-        app:layout_constraintTop_toBottomOf="@+id/event_id"
-        android:fontFamily="@font/roboto"
-        android:textColor="#000000"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_title" />
 
     <TextView
         android:id="@+id/event_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="145dp"
-        android:text="Address:"
-        app:layout_constraintEnd_toStartOf="@+id/event_venue"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_time"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
-        android:textColor="#000000"/>
+        android:text="Address:"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_time" />
 
     <TextView
         android:id="@+id/event_venue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="28dp"
-        android:text="Venue:"
-        app:layout_constraintEnd_toStartOf="@+id/name_venue"
-        app:layout_constraintTop_toBottomOf="@+id/event_days"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
-        android:textColor="#000000"/>
+        android:text="Venue:"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/event_address"
+        app:layout_constraintTop_toBottomOf="@+id/detail_time" />
 
     <TextView
         android:id="@+id/event_point"
@@ -113,22 +94,22 @@
         android:id="@+id/event_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="21dp"
-        android:text="Description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_of_point"
         android:fontFamily="@font/roboto"
-        android:textColor="#000000"/>
+        android:text="Description"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_of_point" />
 
     <Button
-        android:id="@+id/btn_Attendance"
+        android:id="@+id/btn_Regis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/btn_Attendance"
+        android:text="@string/btn_Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,94 +123,82 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="36dp"
+        android:fontFamily="@font/roboto"
         android:text="0028"
+        app:layout_constraintBottom_toBottomOf="@+id/event_id"
         app:layout_constraintStart_toEndOf="@+id/event_id"
-        app:layout_constraintTop_toBottomOf="@+id/image_event"
-        android:fontFamily="@font/roboto"/>
+        app:layout_constraintTop_toTopOf="@+id/event_id" />
 
     <TextView
         android:id="@+id/detail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="212dp"
+        android:fontFamily="@font/roboto"
         android:text="From 30/12/2019 - 30/12/2019"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_date_time"
-        android:fontFamily="@font/roboto"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_date_time" />
 
     <TextView
         android:id="@+id/detail_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="246dp"
+        android:fontFamily="@font/roboto"
         android:text="FROM 8:00 AM - 18:00 PM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_date"
-        android:fontFamily="@font/roboto"/>
-
-    <TextView
-        android:id="@+id/no_of_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="120dp"
-        android:text="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/event_days"
-        app:layout_constraintTop_toBottomOf="@+id/id_number"
-        android:fontFamily="@font/roboto"/>
+        app:layout_constraintTop_toBottomOf="@+id/detail_date" />
 
     <TextView
         android:id="@+id/detail_Address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto"
         android:text="Kampus Utama, Jalan Genting Kelang, 53300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_address"
-        android:fontFamily="@font/roboto"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_address" />
 
     <TextView
         android:id="@+id/name_venue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
         android:text="Sport Complex"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_number"
-        android:fontFamily="@font/roboto"/>
+        app:layout_constraintBottom_toBottomOf="@+id/event_venue"
+        app:layout_constraintStart_toEndOf="@+id/event_venue"
+        app:layout_constraintTop_toTopOf="@+id/event_venue" />
 
     <TextView
         android:id="@+id/no_of_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
         android:text="25 points"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_point"
-        android:fontFamily="@font/roboto"/>
+        app:layout_constraintTop_toBottomOf="@+id/detail_Address" />
 
     <TextView
         android:id="@+id/detail_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="26dp"
+        android:fontFamily="@font/roboto"
         android:text="For all the lover volunteer. You must wear according to..."
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_description"
-        android:fontFamily="@font/roboto"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,9 @@
 package com.example.volunteerassignment.ui.home
 
-import android.accounts.AuthenticatorDescription
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -27,22 +26,23 @@ class eventActivityDetails : AppCompatActivity() {
     private lateinit var requiredPoint:TextView
     private lateinit var description:TextView
     private lateinit var imageevent: ImageView
+    private lateinit var btnRegis:Button
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.events_sign_attendance)
+        setContentView(R.layout.events_detail_register)
 
         ref = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
 
         val extras = this.intent.extras
-        val eventID = extras!!.getString("eventID")
+        val eventID = extras!!.getString("EventID")
 
 
         eventTitle= findViewById(R.id.event_title)
-        evenID= findViewById(R.id.event_id)
+        evenID= findViewById(R.id.id_number)
 
         detaildate=findViewById(R.id.detail_date)
         detailtime=findViewById(R.id.detail_time)
@@ -68,17 +68,16 @@ class eventActivityDetails : AppCompatActivity() {
                     requiredPoint.text=documentSnapshot.get("Point").toString()
                     description.text=documentSnapshot.get("Description").toString()
 
-                    val eventStorageRef = storage.reference.child("Event/Organizer_UID/" + documentSnapshot.get("Organizer_UID").toString() +"/"+eventID.toString() +".jpg")
-                    eventStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
-                            val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                                imageevent.setImageBitmap(bmp)
-                        }
-                            .addOnFailureListener {
-                                imageevent.setImageResource(R.drawable.ic_menu_camera)
-                        }
                     } else {
                     Toast.makeText(this, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
                 }
+                val eventStorageRef = storage.reference.child("Event/"+eventID.toString() +".jpg")
+                eventStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
+                    val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    imageevent.setImageBitmap(bmp)
+                    }.addOnFailureListener {
+                        imageevent.setImageResource(R.drawable.ic_menu_camera)
+                    }
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()

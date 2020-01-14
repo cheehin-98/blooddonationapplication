@@ -18,7 +18,7 @@ android:layout_height="wrap_content">
     android:text="Event Name"
     android:layout_marginLeft="10dp"
     android:gravity="center"
-    android:id="@+id/eventtxt"
+    android:id="@+id/eventTxt"
     android:textSize="25dp"
     android:textStyle="bold"/>
 
