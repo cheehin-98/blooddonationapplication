@@ -27,14 +27,15 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
     private lateinit var recyclerViewAdapter : RecycleViewAdapters
 
     private lateinit var eventImage: ArrayList<String>
-    private lateinit var EventTitle: ArrayList<String>
-    private lateinit var eventDate: ArrayList<String>
+    private lateinit var eventTitle: ArrayList<String>
+    private lateinit var eventFromDate: ArrayList<String>
+    private lateinit var eventToDate: ArrayList<String>
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
     private lateinit var database: FirebaseFirestore
 
-    private val organizerUID = "wf7aHafXMEP9kpTQZq9QhhqCf9y2"
+    private val organizerUID = "kfRxZs5pAvdiQk8F67ZfrjgaA9q1"
 
 
     override fun onCreateView(
@@ -46,42 +47,78 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
         val activity = activity as Context
 
         storage = FirebaseStorage.getInstance()
-        database = FirebaseFirestore.getInstance()//.document("Event/" + organizerUID)
+        database = FirebaseFirestore.getInstance()
         mRecyclerView = root.findViewById(R.id.organization_Today_event_recycle_view)
 
         eventImage = arrayListOf()
-        eventDate = arrayListOf()
-        EventTitle = arrayListOf()
+        eventTitle = arrayListOf()
+        eventFromDate = arrayListOf()
+        eventToDate = arrayListOf()
 
-        database.collection("Event").get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                /*    var  chkToDate = document.get("To Date").toString()
-
-                    val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
-                    val toEventDate = LocalDate.parse(chkToDate, formatter)
-
-                    if(toEventDate < LocalDate.now())
-                    {*/
-                        EventTitle.add(document.get("Event Title").toString())
-                        eventDate.add(document.get("From Date").toString())
-                        eventImage.add(document.id)
-                    //}
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Unable to retrieve Reward data!", Toast.LENGTH_SHORT).show()
-            }
 
         mRecyclerView = root.findViewById(R.id.organization_Today_event_recycle_view)
         layoutMgr = LinearLayoutManager(context)
         mRecyclerView.layoutManager = layoutMgr
-        recyclerViewAdapter = RecycleViewAdapters(activity,EventTitle,eventImage, eventDate)
+        recyclerViewAdapter = RecycleViewAdapters(activity,eventTitle,eventImage, eventFromDate, eventToDate)
         recyclerViewAdapter.notifyDataSetChanged()
         mRecyclerView.adapter = recyclerViewAdapter
 
 
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        clearArrayList()
+        val activity = activity as Context
+        database.collection("Event").get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    if(document.id != null)
+                    {
+                        /*if( document.get("From Date").toString().isNotBlank())
+                        {
+                            var  chkFromDate = document.get("From Date").toString()
+
+                            val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
+                            val getFromDate = LocalDate.parse(chkFromDate, formatter)
+
+                            if(getFromDate < LocalDate.now())
+                            {*/
+                        eventTitle.add(document.get("Event Title").toString())
+                        eventFromDate.add(document.get("From Date").toString())
+                        eventToDate.add(document.get("To Date").toString())
+                        eventImage.add(document.id)
+
+                        /*  }
+                          else {
+                              Toast.makeText(context, "Unable to retrieve data 1 !", Toast.LENGTH_SHORT).show()
+                          }
+                      }
+                      else {
+                          Toast.makeText(context, "Unable to retrieve data 2!", Toast.LENGTH_SHORT).show()
+                      }
+                  }
+                  else {
+                      Toast.makeText(context, "No record!", Toast.LENGTH_SHORT).show()*/
+                    }
+                }
+                layoutMgr = LinearLayoutManager(context)
+                mRecyclerView.layoutManager = layoutMgr
+                recyclerViewAdapter = RecycleViewAdapters(activity,eventTitle,eventImage,eventFromDate,eventToDate)
+                recyclerViewAdapter.notifyDataSetChanged()
+                mRecyclerView.adapter = recyclerViewAdapter
+
+            }.addOnFailureListener {
+                Toast.makeText(context, "Unable to retrieve data 3!", Toast.LENGTH_SHORT).show()
+            }
+    }
+    private fun clearArrayList()
+    {
+        eventTitle.clear()
+        eventFromDate.clear()
+        eventToDate.clear()
+        eventImage.clear()
     }
 
 }
