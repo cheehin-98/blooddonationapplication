@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.example.volunteerassignment.R
+import kotlinx.android.synthetic.main.activity_organizer_generate_attedance.*
+import kotlin.random.Random
 
 class OrganizerGenerateAttedance : AppCompatActivity() {
 
@@ -21,10 +23,11 @@ class OrganizerGenerateAttedance : AppCompatActivity() {
         tv2.findViewById<View>(R.id.tv2)
         tv3.findViewById<View>(R.id.tv3)
         tv4.findViewById<View>(R.id.tv4)
+
+        randomNumber()
     }
 
-    private fun randomNumber()
-    {
+    private fun randomNumber() {
 
     }
 }
