@@ -52,25 +52,25 @@ class OrganizerActivityFragment : Fragment() {
                 0 -> {
                     OrganizerCreateEventFragment()
                 }
-                1 -> {
+                else -> {
                     OrganizerUpdateEventFragmentRecycleView()
                 }
-                else ->{
+                /* ->{
                     OrganizerEventOnTodayFragmentRecycleView()
-                }
+                }*/
             }
 
         }
 
         override fun getCount(): Int {
-            return  3
+            return  2
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
             val TAB_TITLES = arrayOf(
                 "Create Event",
-                "Update Event",
-                "Today Event"
+                "Update Event"
+                //"Today Event"
             )
             return TAB_TITLES[position]
         }

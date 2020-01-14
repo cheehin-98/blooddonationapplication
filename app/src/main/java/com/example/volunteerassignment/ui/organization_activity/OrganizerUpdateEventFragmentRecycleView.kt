@@ -3,6 +3,7 @@ package com.example.volunteerassignment.ui.organization_activity
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.volunteerassignment.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.lang.Exception
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -28,15 +30,15 @@ class OrganizerUpdateEventFragmentRecycleView : Fragment() {
     private lateinit var recyclerViewAdapter : RecycleViewAdapter
 
     private lateinit var eventImage: ArrayList<String>
-    private lateinit var EventTitle: ArrayList<String>
+    private lateinit var eventTitle: ArrayList<String>
+    private lateinit var eventFromDate: ArrayList<String>
+    private lateinit var eventToDate: ArrayList<String>
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
     private lateinit var database:FirebaseFirestore
 
-    private lateinit var btntesting: Button
-
-    private val organizerUID = "wf7aHafXMEP9kpTQZq9QhhqCf9y2"
+    private val organizerUID = "kfRxZs5pAvdiQk8F67ZfrjgaA9q1"
 
 
     override fun onCreateView(
@@ -48,70 +50,75 @@ class OrganizerUpdateEventFragmentRecycleView : Fragment() {
         val activity = activity as Context
 
         storage = FirebaseStorage.getInstance()
-        database = FirebaseFirestore.getInstance()//.document("Event/" + organizerUID)
+        database = FirebaseFirestore.getInstance()
         mRecyclerView = root.findViewById(R.id.organization_update_event_recycleView)
 
         eventImage = arrayListOf()
-        EventTitle = arrayListOf()
-
-        database.collection("Event").get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    var  chkToDate = document.get("To Date").toString()
-
-
-                    val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
-                    val toEventDate = LocalDate.parse(chkToDate, formatter)
-
-                    if(toEventDate > LocalDate.now())
-                    {
-                        EventTitle.add(document.get("Event Title").toString())
-                        eventImage.add(document.id)
-                    }
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Unable to retrieve Reward data!", Toast.LENGTH_SHORT).show()
-            }
+        eventTitle = arrayListOf()
+        eventFromDate = arrayListOf()
+        eventToDate = arrayListOf()
 
         mRecyclerView = root.findViewById(R.id.organization_update_event_recycleView)
         layoutMgr = LinearLayoutManager(context)
         mRecyclerView.layoutManager = layoutMgr
-        recyclerViewAdapter = RecycleViewAdapter(activity,EventTitle,eventImage)
+        recyclerViewAdapter = RecycleViewAdapter(activity,eventTitle,eventImage,eventFromDate,eventToDate)
         recyclerViewAdapter.notifyDataSetChanged()
         mRecyclerView.adapter = recyclerViewAdapter
-
 
         return root
     }
 
-    /*override fun onStart() {
+    override fun onStart() {
         super.onStart()
-        val UserRef = database.collection("Users").document("sample1")
+        clearArrayList()
+        val activity = activity as Context
+        database.collection("Event").get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    if(document.id != null)
+                    {
+                        /*if( document.get("From Date").toString().isNotBlank())
+                        {
+                            var  chkFromDate = document.get("From Date").toString()
 
-        UserRef.addSnapshotListener{ snapshot, e ->
-            if(snapshot!!.exists()){
-                name.setText(getString(R.string.name))
-                name.append(snapshot.get("Name").toString())
-                currPoint.setText(getText(R.string.currPoint))
-                currPoint.append(snapshot.get("Point").toString())
-            }else{
-                Toast.makeText(context, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
+                            val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
+                            val getFromDate = LocalDate.parse(chkFromDate, formatter)
+
+                            if(getFromDate < LocalDate.now())
+                            {*/
+                        eventTitle.add(document.get("Event Title").toString())
+                        eventFromDate.add(document.get("From Date").toString())
+                        eventToDate.add(document.get("To Date").toString())
+                        eventImage.add(document.id)
+
+                        /*  }
+                          else {
+                              Toast.makeText(context, "Unable to retrieve data 1 !", Toast.LENGTH_SHORT).show()
+                          }
+                      }
+                      else {
+                          Toast.makeText(context, "Unable to retrieve data 2!", Toast.LENGTH_SHORT).show()
+                      }
+                  }
+                  else {
+                      Toast.makeText(context, "No record!", Toast.LENGTH_SHORT).show()*/
+                    }
+                }
+                layoutMgr = LinearLayoutManager(context)
+                mRecyclerView.layoutManager = layoutMgr
+                recyclerViewAdapter = RecycleViewAdapter(activity,eventTitle,eventImage,eventFromDate,eventToDate)
+                recyclerViewAdapter.notifyDataSetChanged()
+                mRecyclerView.adapter = recyclerViewAdapter
+            }.addOnFailureListener {
+                Toast.makeText(context, "Unable to retrieve data 3!", Toast.LENGTH_SHORT).show()
             }
-        }
     }
 
-    private fun loadContent1(){
-        val profileStorageRef = storage.reference.child("User/sample1/profile.jpg")//sample1 is UID
-
-        val ONE_MEGABYTE = (1024 * 1024).toLong()
-
-        profileStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
-            val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            profileImg.setImageBitmap(bmp)
-        }
-            .addOnFailureListener {
-                profileImg.setImageResource(R.drawable.ic_menu_camera)
-            }
-    }*/
+    private fun clearArrayList()
+    {
+        eventTitle.clear()
+        eventFromDate.clear()
+        eventToDate.clear()
+        eventImage.clear()
+    }
 }

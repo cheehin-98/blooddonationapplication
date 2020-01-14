@@ -13,15 +13,15 @@ import androidx.cardview.widget.CardView
 import com.example.volunteerassignment.R
 import com.google.firebase.storage.FirebaseStorage
 
-class RecycleViewAdapter(val context: Context, val EventTitle: ArrayList<String>, private val eventImages: ArrayList<String>) :
+class RecycleViewAdapter(val context: Context, val eventTitle: ArrayList<String>, private val eventImage: ArrayList<String>, private val eventFromDate: ArrayList<String>, private val eventToDate: ArrayList<String>) :
     RecyclerView.Adapter<RecycleViewAdapter.ImgViewHolder>() {
 
-    val Organizer_UID = "GiagDmqIQJZZOOHPHqhnbAedGLh1"
+    val Organizer_UID = "kfRxZs5pAvdiQk8F67ZfrjgaA9q1"
     val storage = FirebaseStorage.getInstance()
     val ONE_MEGABYTE = (1024 * 1024).toLong()
 
     override fun getItemCount(): Int {
-        return eventImages.size
+        return eventImage.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImgViewHolder {
@@ -33,10 +33,12 @@ class RecycleViewAdapter(val context: Context, val EventTitle: ArrayList<String>
     }
 
     override fun onBindViewHolder(holder: ImgViewHolder, position: Int) {
-        holder.txtEventTitle.text = EventTitle[position]
+        holder.txtEventTitle.text = eventTitle[position]
+        holder.txtEventFromDate.text = "From Date: " + eventFromDate[position]
+        holder.txtEventToDate.text = "To Date: " + eventToDate[position]
 
         //find img
-        val rewardRef= storage.reference.child("Event/Organizer_UID/"+ Organizer_UID +"/"+ eventImages[position]+".jpg")
+        val rewardRef= storage.reference.child("Event/"+ eventImage[position]+".jpg")
 
         rewardRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
             val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
@@ -49,16 +51,16 @@ class RecycleViewAdapter(val context: Context, val EventTitle: ArrayList<String>
 
       holder.cardUpdateListView.setOnClickListener {
             val intent = Intent(context, OrganizerUpdateEventActivity::class.java)
-            intent.putExtra("imgID",eventImages[position])
+            intent.putExtra("imgID",eventImage[position])
             context.startActivity(intent)
         }
-
-
     }
 
     class ImgViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val eventImg = view.findViewById<ImageButton>(R.id.event_image)
-        val txtEventTitle = view.findViewById<TextView>(R.id.eventTitle)
+        val eventImg = view.findViewById<ImageButton>(R.id.event_imageu)
+        val txtEventTitle = view.findViewById<TextView>(R.id.eventTitleu)
+        val txtEventFromDate = view.findViewById<TextView>(R.id.eventFromDateu)
+        val txtEventToDate = view.findViewById<TextView>(R.id.eventToDateu)
         val cardUpdateListView = view.findViewById<CardView>(R.id.cardUpdateListView)
 
 

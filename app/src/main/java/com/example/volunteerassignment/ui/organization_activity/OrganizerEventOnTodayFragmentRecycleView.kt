@@ -56,17 +56,17 @@ class OrganizerEventOnTodayFragmentRecycleView : Fragment() {
         database.collection("Event").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    var  chkToDate = document.get("To Date").toString()
+                /*    var  chkToDate = document.get("To Date").toString()
 
                     val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
                     val toEventDate = LocalDate.parse(chkToDate, formatter)
 
                     if(toEventDate < LocalDate.now())
-                    {
+                    {*/
                         EventTitle.add(document.get("Event Title").toString())
                         eventDate.add(document.get("From Date").toString())
                         eventImage.add(document.id)
-                    }
+                    //}
                 }
             }
             .addOnFailureListener {

@@ -77,4 +77,5 @@
     <string name="btnDeleteEvent">Delete Event</string>
     <string name="btnGenerateAttendance">Generate Attendance</string>
     <string name="redeem">Redeem</string>
+    <string name="line">-</string>
 </resources>

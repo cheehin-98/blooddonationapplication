@@ -10,11 +10,14 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.core.net.toFile
 import com.example.volunteerassignment.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.lang.Exception
+import java.net.URI
 import java.security.AccessController.getContext
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -37,22 +40,20 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
     private lateinit var eventImage: ImageView
     private lateinit var chkTermAndCondition: CheckBox
     private lateinit var mImageUri:Uri
-    private lateinit var imgID: String
+    private lateinit var getEventUpdateDate: Calendar
     private val c = Calendar.getInstance()
     private val year = c.get(Calendar.YEAR)
     private val month = c.get(Calendar.MONTH)
     private val day = c.get(Calendar.DAY_OF_MONTH)
-
     private lateinit var storage: FirebaseStorage
     private lateinit var database: FirebaseFirestore
 
-    val Organizer_UID = "GiagDmqIQJZZOOHPHqhnbAedGLh1"
+    val Organizer_UID = "kfRxZs5pAvdiQk8F67ZfrjgaA9q1"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_organizer_update_event)
 
-         imgID = intent.getStringExtra("imgID")
 
         fromDate = findViewById(R.id.editEventFromDateu)
         toDate = findViewById(R.id.editEventToDateu)
@@ -73,55 +74,67 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         database = FirebaseFirestore.getInstance()
 
+        mImageUri = Uri.EMPTY
+
         getEventFromDate()
         getEventToDate()
         getEventFromTime()
         getEventToTime()
-        btnUpdateEvent()
+
         btnUploadEventImage.setOnClickListener {
-            pickFromGallery(1)
+            pickFromGallery(0)
+        }
+        btnUpdateEvent.setOnClickListener {
+            validateField()
+        }
+
+        btnDeleteEvent.setOnClickListener {
+            deleteEvent()
         }
     }
 
     override fun onStart() {
         super.onStart()
-        val ONE_MEGABYTE = (1024 * 1024).toLong()
-        val UserRef = database.collection("Event").document(imgID)
-        val rewardRef= storage.reference.child("Event/Organizer_UID/"+ Organizer_UID +"/"+ imgID+".jpg")
+        bindValue()
+    }
+    private fun bindValue(){
 
+        val bundle :Bundle ?=intent.extras
+        if (bundle!=null){
+            val imgID = bundle.getString("imgID") // 1
 
-        rewardRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
-            val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            eventImage.setImageBitmap(bmp)
-        }
-            .addOnFailureListener {
-                eventImage.setImageResource(R.drawable.ic_menu_camera)
-            }
+            val ONE_MEGABYTE = (1024 * 1024).toLong()
+            val UserRef = database.collection("Event").document(imgID.toString())
+            val eventRef= storage.reference.child("Event/"+ imgID+".jpg")
 
-
-        UserRef.addSnapshotListener{ snapshot, e ->
-            if(snapshot!!.exists()){
-                fromDate.append(snapshot.get("From Date").toString())
-                toDate.append(snapshot.get("To Date").toString())
-                fromTime.append(snapshot.get("From Time").toString())
-                toTime.append(snapshot.get("To Time").toString())
-                eventTitle.append(snapshot.get("Event Title").toString())
-                numOfParti.append(snapshot.get("Number of Participate").toString())
-                point.append(snapshot.get("Point").toString())
-                address.append(snapshot.get("Address").toString())
-                venue.append(snapshot.get("Venue").toString())
-                description.append(snapshot.get("Description").toString())
+            eventRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
+                val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                eventImage.setImageBitmap(bmp)
 
             }
+                .addOnFailureListener {
+                    eventImage.setImageResource(R.drawable.ic_menu_camera)
+                }
 
-            else{
-                Toast.makeText(this, "Unable to retrieve data!", Toast.LENGTH_SHORT).show()
+            UserRef.addSnapshotListener{ snapshot, e ->
+                if(snapshot!!.exists()){
+                    fromDate.append(snapshot.get("From Date").toString())
+                    toDate.append(snapshot.get("To Date").toString())
+                    fromTime.append(snapshot.get("From Time").toString())
+                    toTime.append(snapshot.get("To Time").toString())
+                    eventTitle.append(snapshot.get("Event Title").toString())
+                    numOfParti.append(snapshot.get("Number of Participate").toString())
+                    point.append(snapshot.get("Point").toString())
+                    address.append(snapshot.get("Address").toString())
+                    venue.append(snapshot.get("Venue").toString())
+                    description.append(snapshot.get("Description").toString())
+                }
             }
         }
     }
 
 
-    private fun pickFromGallery(int: Int) {
+    private fun pickFromGallery(int : Int) {
 
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -200,17 +213,6 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
             }
 
             TimePickerDialog(this, timeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), false).show()
-        }
-    }
-
-    private fun btnUpdateEvent()
-    {
-        btnUpdateEvent.setOnClickListener {
-            validateField()
-        }
-
-        btnDeleteEvent.setOnClickListener {
-            deleteEvent()
         }
     }
 
@@ -294,8 +296,6 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
     private fun insertDatabase()
     {
         val setEventTitle = eventTitle.text.toString()
-        val setEventFromDate = fromDate.text.toString()
-        val setEventToDate = toDate.text.toString()
         val setEventFromTime = fromTime.text.toString()
         val setEventToTime = toTime.text.toString()
         val setEventNumOfParti = numOfParti.text.toString()
@@ -303,63 +303,90 @@ class OrganizerUpdateEventActivity : AppCompatActivity() {
         val setEventAddress = address.text.toString()
         val setEventVenue = venue.text.toString()
         val setEventDescription = description.text.toString()
-        var imgID = ""
-        try {
+
+       try {
+            val bundle :Bundle ?=intent.extras
+            if (bundle!=null) {
+                val imgID = bundle.getString("imgID")
+
             if(chkTermAndCondition.isChecked) {
                 val fromDates = fromDate.text.toString()
                 val toDates = toDate.text.toString()
 
+                getEventUpdateDate = Calendar.getInstance()
+
                 val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
+                var setEventUpdateDate = DateFormat.getDateInstance().format(getEventUpdateDate.time)
+
                 val fromEventDate = LocalDate.parse(fromDates, formatter)
                 val toEventDate = LocalDate.parse(toDates, formatter)
 
                     if (mImageUri != null) {
 
-                        if (fromEventDate >= toEventDate) {
-                            fromDate.requestFocus()
-                            fromDate.setError("From Date Not More Than To Date!")
+                            if (fromEventDate <= toEventDate) {
 
-                            val events = HashMap<String, Any>()
+                                val updateRef = database.collection("Event").document(imgID.toString())
+                                updateRef.update("Event Title",setEventTitle)
+                                updateRef.update("From Date", fromDates)
+                                updateRef.update("To Date", toDates)
+                                updateRef.update( "From Time", setEventFromTime)
+                                updateRef.update("To Time", setEventToTime)
+                                updateRef.update( "Number of Participate", setEventNumOfParti)
+                                updateRef.update("Point", setEventPoint)
+                                updateRef.update("Address", setEventAddress)
+                                updateRef.update("Venue", setEventVenue)
+                                updateRef.update("Description", setEventDescription)
+                                updateRef.update("Event Last Update ", setEventUpdateDate)
 
-                            val progressDialog = ProgressDialog(this)
-                            progressDialog.setTitle("Uploading")
-                            progressDialog.show()
-
-                            val updateRef = database.collection("Event").document(imgID)
-                            updateRef.update("Event Title",setEventTitle)
-                            updateRef.update(setEventFromDate, "From Date")
-                            updateRef.update(setEventToDate, "To Date")
-                            updateRef.update(setEventFromTime, "From Time")
-                            updateRef.update(setEventToTime, "To Time")
-                            updateRef.update(setEventNumOfParti, "Number of Participate")
-                            updateRef.update(setEventPoint, "Point")
-                            updateRef.update(setEventAddress, "Address")
-                            updateRef.update(setEventVenue, "Venue")
-                            updateRef.update(setEventDescription, "Description")
-                            events.put("Event Last Update ", LocalDate.now())
-
-                            progressDialog.hide()
+                                Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show()
+                                onBackPressed()
+                                }
+                            else
+                            {
+                                fromDate.requestFocus()
+                                fromDate.setError("From Date Not More Than To Date!")
+                                toDate.requestFocus()
+                                toDate.setError("From Date Not More Than To Date!")
                             }
                         }
                     }
+                }
             } catch (e: Exception)
                 {
                     Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
                 }
             return
+
     }
 
     private fun deleteEvent()
     {
-         database.collection("Event").document(imgID).delete().addOnSuccessListener {
-            Toast.makeText(this, "Data deleted !", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener {
-            Toast.makeText(this, "Data Not deleted !", Toast.LENGTH_SHORT).show()
+        try {
+                val bundle: Bundle? = intent.extras
+                if (bundle != null) {
+                    if(chkTermAndCondition.isChecked) {
+                    val imgID = bundle.getString("imgID")
+                    database.collection("Event").document(imgID.toString()).delete().addOnSuccessListener {
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Data Not deleted !", Toast.LENGTH_SHORT).show()
+                    }
+                    storage.reference.child("Event/"+ imgID+".jpg").delete()
+                        .addOnSuccessListener { Toast.makeText(this, "Data deleted !", Toast.LENGTH_SHORT).show()
+                            onBackPressed()
+                        }.addOnFailureListener { Toast.makeText(this, "Data Not deleted !", Toast.LENGTH_SHORT).show()  }
+
+                }
+                    else
+                    {
+                        Toast.makeText(this, " Please Confirm the TERM AND CONDITION!", Toast.LENGTH_LONG).show()
+                        chkTermAndCondition.requestFocus()
+                    }
+            }
+
+        }catch (e: Exception)
+        {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
         }
-
-        storage.reference.child("Event/Organizer_UID/"+ Organizer_UID +"/"+ imgID+".jpg").delete()
-            .addOnSuccessListener { Toast.makeText(this, "Data deleted !", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener { Toast.makeText(this, "Data Not deleted !", Toast.LENGTH_SHORT).show()  }
-
+        return
     }
 }

@@ -14,7 +14,7 @@ import java.util.*
 
 class OrganizerTodayEventActivity : AppCompatActivity() {
 
-    private lateinit var btnGenAttendance: Button
+   // private lateinit var btnGenAttendance: Button
     private lateinit var fromDate : TextView
     private lateinit var toDate : TextView
     private lateinit var fromTime : TextView
@@ -48,13 +48,13 @@ class OrganizerTodayEventActivity : AppCompatActivity() {
 
         imgID = intent.getStringExtra("imgID")
 
-        btnGenAttendance.findViewById<View>(R.id.btnGenerateAttendance)
+       /* btnGenAttendance.findViewById<View>(R.id.btnGenerateAttendance)
 
         btnGenAttendance.setOnClickListener {
             val intent = Intent(this, OrganizerGenerateAttedance::class.java)
             intent.putExtra("imgID", imgID)
             this.startActivity(intent)
-        }
+        }*/
 
     }
 

@@ -7,6 +7,7 @@ import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.icu.text.UFormat
 import android.media.Image
 import android.net.Uri
 import android.os.Build
@@ -16,17 +17,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.net.toFile
 import androidx.lifecycle.ViewModelProviders
 import com.example.volunteerassignment.MainActivity
 import com.example.volunteerassignment.R
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.protobuf.Empty
 import java.lang.Exception
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -52,16 +56,15 @@ class OrganizerCreateEventFragment : Fragment() {
     private lateinit var eventImage: ImageView
     private lateinit var chkTermAndCondition: CheckBox
     private lateinit var mImageUri: Uri
-
+    private lateinit var createEventDate: Calendar
     private val c = Calendar.getInstance()
     private val year = c.get(Calendar.YEAR)
     private val month = c.get(Calendar.MONTH)
     private val day = c.get(Calendar.DAY_OF_MONTH)
-
     private lateinit var storage: FirebaseStorage
     private lateinit var database:FirebaseFirestore
-
-    private val organizerUID = "GiagDmqIQJZZOOHPHqhnbAedGLh1"
+    private lateinit var mAuth: FirebaseAuth
+    private var organizerUID = "kfRxZs5pAvdiQk8F67ZfrjgaA9q1"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,6 +92,7 @@ class OrganizerCreateEventFragment : Fragment() {
 
         storage = FirebaseStorage.getInstance()
         database = FirebaseFirestore.getInstance()
+        mAuth = FirebaseAuth.getInstance()
 
         getEventFromDate()
         getEventToDate()
@@ -97,13 +101,13 @@ class OrganizerCreateEventFragment : Fragment() {
         btnCreateEvent()
 
         btnUploadEventImage.setOnClickListener {
-            pickFromGallery(1)
+            pickFromGallery(0)
         }
 
         return root
     }
 
-    private fun pickFromGallery(int: Int) {
+    private fun pickFromGallery(int : Int) {
 
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -282,22 +286,23 @@ class OrganizerCreateEventFragment : Fragment() {
         val setEventAddress = address.text.toString()
         val setEventVenue = venue.text.toString()
         val setEventDescription = description.text.toString()
-        var imgID = ""
         try {
              if(chkTermAndCondition.isChecked) {
                  val fromDates = fromDate.text.toString()
                  val toDates = toDate.text.toString()
 
+
                  val formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH)
+                 createEventDate = Calendar.getInstance()
+
+                 var eventCreateDate = DateFormat.getDateInstance().format(createEventDate.time)
+
                  val fromEventDate = LocalDate.parse(fromDates, formatter)
                  val toEventDate = LocalDate.parse(toDates, formatter)
-
                  try {
-                     if (mImageUri != null) {
+                     if (eventImage.drawable != null) {
 
-                         if (fromEventDate >= toEventDate) {
-                             fromDate.requestFocus()
-                             fromDate.setError("From Date Not More Than To Date!")
+                         if (fromEventDate <= toEventDate) {
 
                              val events = HashMap<String, Any>()
 
@@ -312,44 +317,41 @@ class OrganizerCreateEventFragment : Fragment() {
                              events.put("Venue", setEventVenue)
                              events.put("Description", setEventDescription)
                              events.put("Orgernizer_UID", organizerUID)
-
+                             events.put("Create Event", eventCreateDate)
+                             events.put("Image Path", mImageUri.toString())
 
                              val progressDialog = ProgressDialog(getContext())
                              progressDialog.setTitle("Inserting")
                              progressDialog.show()
 
                              //Insert
-                             database.collection("Event").document()
+                             var getImgId =  database.collection("Event").document().id
+                             database.collection("Event").document(getImgId)
                                  .set(events).addOnSuccessListener {
 
-                                  database.collection("Event").get()
-                                         .addOnSuccessListener { document ->
+                                     val storageRef =
+                                         storage.reference.child("Event/")
+                                     val profileRef = storageRef.child(getImgId+".jpg")
+                                     profileRef.putFile(mImageUri)
+                                     Toast.makeText(context, " Added!", Toast.LENGTH_SHORT).show()
 
-                                             for (document in document){
-                                                 imgID = document.id
+                                     createAll()
+                                     progressDialog.hide()
 
-
-                                                 val storageRef =
-                                                    storage.reference.child("Event/Organizer_UID/" + organizerUID +"/")//sample1 should be replace with user login UID
-
-                                                val profileRef = storageRef.child(imgID+".jpg")
-
-                                                profileRef.putFile(mImageUri)
-
-                                                 Toast.makeText(context, " Added!", Toast.LENGTH_SHORT).show()
-                                                 createAll()
-                                                 progressDialog.hide()
-                                             }
-                                     }
                                  }.addOnFailureListener {
                                      Toast.makeText(context, "No Add!", Toast.LENGTH_SHORT).show()
                                  }
+                         }
+                         else
+                         {
+                             fromDate.requestFocus()
+                             fromDate.setError("From Date Not More Than To Date!")
                          }
                      }
 
                  }catch (e: Exception)
                  {
-                     Toast.makeText(context, "Please Select Event Image", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
                  }
                  return
              }
@@ -359,7 +361,6 @@ class OrganizerCreateEventFragment : Fragment() {
             Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
         }
         return
-
     }
 
     private fun createAll()
