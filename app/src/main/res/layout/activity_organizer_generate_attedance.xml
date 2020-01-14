@@ -5,88 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.organization_activity.OrganizerGenerateAttedance"
-    android:background="@color/btnColorRed">
+    app:cardBackgroundColor="#fafafa">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        android:background="@color/btnColorLightRed"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:background="@color/toolbar_color_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <TextView
-            android:id="@+id/tv1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="-1dp"
-            android:layout_toStartOf="@+id/tv4"
-            android:background="@color/cardview_light_background"
-            android:text="3"
+            android:id="@+id/text_attendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/roboto"
+            android:text="Code"
             android:textAlignment="center"
-            android:textSize="70dp" />
-
-        <TextView
-            android:id="@+id/tv2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignBottom="@+id/tv3"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_toStartOf="@+id/tv3"
-            android:background="@color/cardview_light_background"
-            android:text="3"
-            android:textAlignment="center"
-            android:textSize="70dp" />
-
-        <TextView
-            android:id="@+id/tv3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="100dp"
-            android:layout_toStartOf="@+id/tv1"
-            android:background="@color/cardview_light_background"
-            android:text="3"
-            android:textAlignment="center"
-            android:textSize="70dp" />
-
-        <TextView
-            android:id="@+id/tv4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="-1dp"
-            android:background="@color/cardview_light_background"
-            android:text="3"
-            android:textAlignment="center"
-            android:textSize="70dp" />
-
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btnGenerate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Generate"
+    <ImageButton
+        android:id="@+id/img_btn_back"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/tv1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234"
+        app:srcCompat="@drawable/ic_cancel_black_60dp" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="414dp"
+        android:layout_height="101dp"
+        android:background="@color/cardview_light_background"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

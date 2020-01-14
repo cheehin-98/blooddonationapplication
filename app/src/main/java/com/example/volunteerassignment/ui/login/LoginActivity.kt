@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.widget.*
+import com.example.volunteerassignment.MainActivity
 import com.example.volunteerassignment.R
 import com.example.volunteerassignment.ui.signup.SignUpActivity
 import com.google.android.material.navigation.NavigationView
@@ -66,6 +67,10 @@ class LoginActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     if (user != null) {
                         //updateUI(user)
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.putExtra("email",email)
+                        this.startActivity(intent)
+
                         Toast.makeText(this, "Login Successfully.", Toast.LENGTH_SHORT).show()
                     this.finish()
                     }

@@ -75,10 +75,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputUsername"
         android:layout_width="331dp"
+        android:layout_marginLeft="30dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_account"
         android:layout_marginTop="57dp"
-        android:layout_marginLeft="30dp"
+
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
