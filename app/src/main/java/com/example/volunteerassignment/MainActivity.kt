@@ -25,6 +25,7 @@ import com.example.volunteerassignment.ui.login.LoginActivity
 import com.example.volunteerassignment.ui.signup.SignUpActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.Text
 
 
 class MainActivity : AppCompatActivity(){
@@ -113,10 +114,17 @@ class MainActivity : AppCompatActivity(){
         val login = headerLayout.findViewById<Button>(R.id.btnLogin)
         val logout = headerLayout.findViewById<Button>(R.id.btnLogout)
         val signUp = headerLayout.findViewById<Button>(R.id.btnSignUp)
+        val email = headerLayout.findViewById<TextView>(R.id.nav_email)
         if(currentuser != null){
             login.visibility = View.GONE
             logout.visibility = View.VISIBLE
             signUp.visibility = View.GONE
+
+            val bundle :Bundle ?=intent.extras
+            if (bundle!=null) {
+                val emails = bundle.getString("email")
+               email.text = emails.toString()
+            }
 
             ref.collection("Users").document(currentuser?.uid)
                 .get()
