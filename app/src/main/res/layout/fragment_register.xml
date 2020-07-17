@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@color/toolbar_color_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgBacktoPrevious"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+            <TextView
+                android:id="@+id/signup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/roboto"
+                android:text="Sign Up"
+                android:textColor="@color/textColor"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnUploadPhoto"
+            android:layout_width="165dp"
+            android:layout_height="153dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="128dp"
+            android:layout_marginLeft="128dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="128dp"
+            android:background="@drawable/rounded_select_photo_button"
+            android:text="Upload Photo"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/uploadphoto_imageview_register"
+            android:layout_width="165dp"
+            android:layout_height="153dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="14.5dp"
+            android:layout_marginEnd="128dp"
+            android:layout_marginRight="128dp"
+            app:civ_border_color="@color/toolbar_color_header"
+            app:civ_border_width="2dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textUserType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto"
+                android:text="User Type:"
+                android:textColor="@color/toolbar_color_header"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinnerUser"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="50dp"
+                android:entries="@array/user_account"
+                android:prompt="@string/user_type"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textBloodType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Blood Type:"
+                android:textColor="@color/toolbar_color_header"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textUserType" />
+
+            <Spinner
+                android:id="@+id/spinnerBloodType"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:entries="@array/user_blood_type"
+                android:prompt="@string/blood_type"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerUser" />
+
+            <TextView
+                android:id="@+id/textGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Gender:"
+                android:textColor="@color/toolbar_color_header"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textBloodType" />
+
+            <Spinner
+                android:id="@+id/spinnerGender"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:entries="@array/user_gender"
+                android:prompt="@string/gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerBloodType" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputSignupUsername"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:hint="@string/keyinSignupUsername"
+                android:textColorHint="@color/toolbar_color_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textGender">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/keyinSignupUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textLongMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputSignupEmail"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:textColorHint="@color/toolbar_color_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputSignupUsername">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/keyinSignupEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/keyinSignupEmail"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputSignupPassword"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:textColorHint="@color/toolbar_color_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputSignupEmail"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editSignupPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/keyinSignupPassword"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/toolbar_color_header"
+                android:fontFamily="@font/roboto"
+                android:text="Register"
+                android:textAllCaps="false"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputSignupPassword" />
+
+            <ProgressBar
+                android:id="@+id/progressBarRegister"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputSignupEmail" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</LinearLayout>
