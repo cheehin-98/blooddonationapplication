@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
     </LinearLayout>
 
@@ -91,22 +91,23 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary">
+                android:background="@color/toolbar_color_header"
+                app:tabTextColor="@color/textColor">
 
                 <com.google.android.material.tabs.TabItem
-                    android:text="@string/achieve"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"/>
+                    android:text="@string/achieve" />
 
                 <com.google.android.material.tabs.TabItem
-                    android:text="@string/follow"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"/>
+                    android:text="@string/follow" />
 
                 <com.google.android.material.tabs.TabItem
-                    android:text="@string/attend"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"/>
+                    android:text="@string/attend" />
 
             </com.google.android.material.tabs.TabLayout>
 

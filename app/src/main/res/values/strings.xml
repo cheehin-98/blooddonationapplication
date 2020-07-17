@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VolunteerAssignment</string>
+    <string name="app_name">blooddonationapplication</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -11,11 +11,14 @@
     <string name="nav_header_button2">Sign Up</string>
     <string name="nav_header_button3">Logout</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_event">Event</string>
     <string name="user_menu_Notification">Notification</string>
     <string name="user_menu_myActivity">My Activity</string>
+    <string name="user_menu_donor_chat">Real Time Chat</string>
+    <string name="user_menu_donor_find_blood_drive">Find Blood Drive</string>
     <string name="user_menu_PointAndRedeem">Point And Redeem</string>
     <string name="user_menu_myAccount">My Account</string>
+    <string name="user_menu_organizer_real_time_chat">Real Time Chat</string>
     <string name="btn_Register">Register</string>
 
     <!--Setting-->
@@ -38,18 +41,33 @@
 
 
     <string name="user_type"></string>
+    <string name="blood_type"></string>
+    <string name="gender"></string>
     <string name="sign_up">Sign Up</string>
     <string name="login">Login</string>
     <string name="keyinUsername">Username/Email</string>
     <string name="keyinPassword">Password</string>
     <string name="linktoSigup">Don\'t have an account? Please Sigup Now.</string>
+    <string name="ForgetPassword">Forget Password?</string>
     <string name="keyinSignupUsername">Username</string>
     <string name="keyinSignupPassword">Password</string>
     <string name="keyinSignupEmail">Email</string>
     <string-array name="user_account">
-        <item>Volunteer</item>
+        <item>Donor</item>
         <item>Organizer</item>
     </string-array>
+    <string-array name="user_blood_type">
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+        <item>O</item>
+        <item>No Idea</item>
+    </string-array>
+    <string-array name="user_gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
     <string name="title_activity_prize_detail">PrizeDetailActivity</string>
 
 
@@ -64,7 +82,7 @@
     <string name="eventVenue">Venue</string>
     <string name="eventPoint">Point</string>
     <string name="eventDescription">Description</string>
-    <string name="termAndCondition">Check here to indicate that you have read and agree to the terms of the Registration of Volunteer Event </string>
+    <string name="termAndCondition">Check here to indicate that you have read and agree to the terms of the Registration of Blood Donation Event </string>
     <string name="btnCreateEvent">Create Event</string>
     <string name="organizerCreateEvent">Create Event</string>
     <string name="btnUpdateEvent">Update Event</string>
@@ -78,4 +96,7 @@
     <string name="btnGenerateAttendance">Generate Attendance</string>
     <string name="redeem">Redeem</string>
     <string name="line">-</string>
+
+
+    <string name="lorem_ipsum">Hello World</string>
 </resources>

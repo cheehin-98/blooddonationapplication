@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
-
-<ImageButton
-    android:layout_width="150dp"
-    android:layout_height="150dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="20dp"
-    android:id="@+id/eventImg"/>
-
-<TextView
-    android:layout_width="150dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Event Name"
-    android:layout_marginLeft="10dp"
-    android:gravity="center"
-    android:id="@+id/eventTxt"
-    android:textSize="25dp"
-    android:textStyle="bold"/>
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/eventImg"
+        android:layout_width="162dp"
+        android:layout_height="159dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/eventTxt"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Event Name"
+        android:textColor="@color/toolbar_color_header"
+        android:textSize="25dp" />
 
 </LinearLayout>

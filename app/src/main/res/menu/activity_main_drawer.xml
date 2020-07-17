@@ -5,24 +5,29 @@
 
     <group android:checkableBehavior="single" android:id="@+id/def" android:visible="true">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_event"
+            android:icon="@drawable/ic_event_note_black_24dp"
+            android:title="@string/menu_event" />
     </group>
-    <group android:checkableBehavior="single" android:id="@+id/user_navigate" android:visible="false">
-
-        <item
-            android:id="@+id/nav_user_notification"
-            android:icon="@drawable/ic_menu_notifications"
-            android:title="@string/user_menu_Notification" /> <!--Home, ic_menu_camera-->
+    <group android:checkableBehavior="single" android:id="@+id/donor_navigate" android:visible="false">
         <item
             android:id="@+id/nav_user_activity"
-            android:icon="@drawable/ic_menu_activity"
+            android:icon="@drawable/ic_access_time_black_24dp"
             android:title="@string/user_menu_myActivity" /> <!--Gallery, ic_menu_gallery-->
         <item
-            android:id="@+id/nav_user_point_and_redeem"
-            android:icon="@drawable/ic_menu_redeem"
-            android:title="@string/user_menu_PointAndRedeem" /><!--slideshow, ic_menu_slideshow, menu_slideshow-->
+            android:id="@+id/nav_user_notification"
+            android:icon="@drawable/ic_notifications_active_black_24dp"
+            android:title="@string/user_menu_Notification" /> <!--Home, ic_menu_camera-->
+
+        <item
+            android:id="@+id/nav_find_blood_drive"
+            android:icon="@drawable/ic_find_in_page_black_24dp"
+            android:title="@string/user_menu_donor_find_blood_drive" />
+        <item
+            android:id="@+id/nav_donor_chat"
+            android:icon="@drawable/ic_chat_black_24dp"
+            android:title="@string/user_menu_donor_chat" />
+
         <item
             android:id="@+id/nav_user_account"
             android:icon="@drawable/ic_menu_manage"
@@ -31,17 +36,20 @@
 
     <group android:checkableBehavior="single" android:id="@+id/organization_navigate" android:visible="false">
         <item
-            android:id="@+id/nav_organizer_notification"
-            android:icon="@drawable/ic_menu_notifications"
-            android:title="@string/user_menu_Notification" />
-        <item
             android:id="@+id/nav_organizer_activity"
-            android:icon="@drawable/ic_menu_activity"
+            android:icon="@drawable/ic_access_time_black_24dp"
             android:title="@string/user_menu_myActivity" />
+
         <item
-            android:id="@+id/nav_organizer_account"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/user_menu_myAccount" />
+            android:id="@+id/nav_organizer_notification"
+            android:icon="@drawable/ic_notifications_active_black_24dp"
+            android:title="@string/user_menu_Notification" />
+
+        <item
+            android:id="@+id/nav_organizer_real_time_chat"
+            android:icon="@drawable/ic_chat_black_24dp"
+            android:title="@string/user_menu_organizer_real_time_chat" />
+
 
     </group>
 

@@ -9,21 +9,22 @@
         android:id="@+id/image_event"
         android:layout_width="408dp"
         android:layout_height="167dp"
+        android:background="@drawable/run_event"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blood_donation_event" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/event_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="TARC SMART CAMP"
-        android:textColor="#000000"
+        android:textColor="@color/toolbar_color_header"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_event" />
 
@@ -31,50 +32,53 @@
         android:id="@+id/event_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="148dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
         android:text="ID:  "
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/event_title"
-        app:layout_constraintTop_toBottomOf="@+id/image_event" />
+        android:textColor="@color/toolbar_color_header"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_title" />
 
     <TextView
         android:id="@+id/event_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
-        android:text="Date and Time"
-        android:textColor="#000000"
+        android:text="Date"
+        android:textColor="@color/toolbar_color_header"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_title" />
+        app:layout_constraintTop_toBottomOf="@+id/event_id" />
 
     <TextView
         android:id="@+id/event_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
         android:text="Address:"
-        android:textColor="#000000"
+        android:textColor="@color/toolbar_color_header"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_time" />
+        app:layout_constraintTop_toBottomOf="@+id/event_venue" />
 
     <TextView
         android:id="@+id/event_venue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
         android:text="Venue:"
-        android:textColor="#000000"
-        app:layout_constraintStart_toEndOf="@+id/event_address"
-        app:layout_constraintTop_toBottomOf="@+id/detail_time" />
+        android:textColor="@color/toolbar_color_header"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/event_point"
@@ -94,29 +98,31 @@
         android:id="@+id/event_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
         android:text="Description"
-        android:textColor="#000000"
+        android:textColor="@color/toolbar_color_header"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_of_point" />
+        app:layout_constraintTop_toBottomOf="@+id/detail_Address" />
 
     <Button
         android:id="@+id/btn_Regis"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/toolbar_color_header"
+        android:fontFamily="@font/roboto"
         android:text="@string/btn_Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="#72bcd4"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:fontFamily="@font/roboto"/>
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_description" />
 
     <TextView
         android:id="@+id/id_number"
@@ -125,45 +131,47 @@
         android:layout_marginStart="20dp"
         android:fontFamily="@font/roboto"
         android:text="0028"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/event_id"
         app:layout_constraintStart_toEndOf="@+id/event_id"
-        app:layout_constraintTop_toTopOf="@+id/event_id" />
+        app:layout_constraintTop_toTopOf="@+id/event_id"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/detail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="212dp"
         android:fontFamily="@font/roboto"
         android:text="From 30/12/2019 - 30/12/2019"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_date_time" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/event_date_time"
+        app:layout_constraintStart_toEndOf="@+id/event_date_time"
+        app:layout_constraintTop_toBottomOf="@+id/event_id"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/detail_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="246dp"
+        android:layout_marginStart="13dp"
         android:fontFamily="@font/roboto"
         android:text="FROM 8:00 AM - 18:00 PM"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_date" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/detail_Address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="357dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="38dp"
         android:fontFamily="@font/roboto"
         android:text="Kampus Utama, Jalan Genting Kelang, 53300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur."
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_address" />
@@ -172,33 +180,38 @@
         android:id="@+id/name_venue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:fontFamily="@font/roboto"
         android:text="Sport Complex"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/event_venue"
         app:layout_constraintStart_toEndOf="@+id/event_venue"
-        app:layout_constraintTop_toTopOf="@+id/event_venue" />
-
-    <TextView
-        android:id="@+id/no_of_point"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="25 points"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_Address" />
+        app:layout_constraintTop_toTopOf="@+id/event_venue"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/detail_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="26dp"
+        android:layout_width="365dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
         android:fontFamily="@font/roboto"
         android:text="For all the lover volunteer. You must wear according to..."
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_description" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Time"
+        android:textColor="@color/toolbar_color_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_date_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,22 +15,29 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary">
+            android:background="@color/toolbar_color_header"
+            app:tabTextColor="@color/textColor">
 
             <com.google.android.material.tabs.TabItem
-                android:text="Event"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
+                android:text="Event" />
 
-<!--            <com.google.android.material.tabs.TabItem-->
-<!--                android:text="Comming Soon"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_width="match_parent"/>-->
+            <!--            <com.google.android.material.tabs.TabItem-->
+            <!--                android:text="Comming Soon"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_width="match_parent"/>-->
 
             <com.google.android.material.tabs.TabItem
-                android:text="Event History"
+                android:id="@+id/TabItem"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
+                android:text="Joining Event" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Event History" />
 
         </com.google.android.material.tabs.TabLayout>
 

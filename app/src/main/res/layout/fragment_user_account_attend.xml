@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user_account.UserAccountAttend"
+    tools:context=".ui.donorAccount.UserAccountAttend"
     android:orientation="vertical">
 
     <ScrollView

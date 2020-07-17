@@ -18,22 +18,23 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fc6565">
+            android:background="@color/toolbar_color_header"
+            app:tabTextColor="@color/textColor">
 
             <com.google.android.material.tabs.TabItem
-                android:text="@string/organizerCreateEvent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent" />
+                android:text="@string/organizerCreateEvent" />
 
             <com.google.android.material.tabs.TabItem
-                android:text="@string/organizerUpdateEvent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
+                android:text="@string/organizerUpdateEvent" />
 
             <com.google.android.material.tabs.TabItem
-                android:text="@string/Today"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
+                android:text="@string/Today" />
 
         </com.google.android.material.tabs.TabLayout>
 

@@ -3,57 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_event">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.volunteerassignment.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_event"
+        android:name="com.example.blooddonationapplication.ui.donorEvent.EventFragment"
+        android:label="Event" />
 
     <fragment
         android:id="@+id/nav_user_notification"
-        android:name="com.example.volunteerassignment.ui.user_notification.UserNotificationFragment"
+        android:name="com.example.blooddonationapplication.ui.donorNotification.UserNotificationFragment"
         android:label="@string/user_menu_Notification"
         tools:layout="@layout/fragment_user_notification" />
 
     <fragment
         android:id="@+id/nav_user_account"
-        android:name="com.example.volunteerassignment.ui.user_account.UserAccountFragment"
+        android:name="com.example.blooddonationapplication.ui.donorAccount.UserAccountFragment"
         android:label="@string/user_menu_myAccount"
         tools:layout="@layout/fragment_user_my_account" />
 
     <fragment
         android:id="@+id/nav_user_activity"
-        android:name="com.example.volunteerassignment.ui.user_activity.UserActivityFragment"
-        android:label="@string/user_menu_myActivity"
-        tools:layout="@layout/fragment_user_my_activity" />
-
-    <fragment
-        android:id="@+id/nav_user_point_and_redeem"
-        android:name="com.example.volunteerassignment.ui.user_point_and_redeem.UserPointAndRedeemFragment"
-        android:label="@string/user_menu_PointAndRedeem"
-        tools:layout="@layout/fragment_user_point_and_redeem" />
-
+        android:name="com.example.blooddonationapplication.ui.donorActivity.UserActivityFragment"
+        android:label="@string/user_menu_myActivity" />
 
 
     <!--Organization menu-->
 
     <fragment
         android:id="@+id/nav_organizer_notification"
-        android:name="com.example.volunteerassignment.ui.organization_notification.OrganizerNotificationFragment"
+        android:name="com.example.blooddonationapplication.ui.organizerNotification.OrganizerNotificationFragment"
         android:label="@string/user_menu_Notification"
         tools:layout="@layout/fragment_organization_notification" />
 
     <fragment
-        android:id="@+id/nav_organizer_account"
-        android:name="com.example.volunteerassignment.ui.organization_account.OrganizerAccountFragment"
-        android:label="@string/user_menu_myAccount"
-        tools:layout="@layout/fragment_organization_my_account" />
-
-    <fragment
         android:id="@+id/nav_organizer_activity"
-        android:name="com.example.volunteerassignment.ui.organization_activity.OrganizerActivityFragment"
-        android:label="@string/user_menu_myActivity"
-        tools:layout="@layout/fragment_organization_my_activity" />
+        android:name="com.example.blooddonationapplication.ui.organizerEvent.OrganizerActivityFragment"
+        android:label="@string/user_menu_myActivity" />
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.example.blooddonationapplication.ui.donorChat.ChatFragment"
+        android:label="@string/user_menu_donor_chat" />
+    <fragment
+        android:id="@+id/nav_find_blood_drive"
+        android:name="com.example.blooddonationapplication.ui.find_blood_drive.FindBloodDrive"
+        android:label="@string/user_menu_donor_find_blood_drive"
+        tools:layout="@layout/fragment_find_blood_drive" />
 </navigation>
